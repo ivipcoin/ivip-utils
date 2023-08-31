@@ -1,52 +1,6 @@
+import { isArray, isObject, isString, isBoolean, isNumber, isNull, isNotNumber, isInfinity, isDate, isUndefined, isFunction, isSymbol } from "./validation";
+
 const JSONStringify = (obj: any): string => {
-	const isArray = (value: any): boolean => {
-		return Array.isArray(value) && typeof value === "object";
-	};
-
-	const isObject = (value: any): boolean => {
-		return typeof value === "object" && value !== null && !Array.isArray(value);
-	};
-
-	const isString = (value: any): boolean => {
-		return typeof value === "string";
-	};
-
-	const isBoolean = (value: any): boolean => {
-		return typeof value === "boolean";
-	};
-
-	const isNumber = (value: any): boolean => {
-		return typeof value === "number";
-	};
-
-	const isNull = (value: any): boolean => {
-		return value === null && typeof value === "object";
-	};
-
-	const isNotNumber = (value: any): boolean => {
-		return typeof value === "number" && isNaN(value);
-	};
-
-	const isInfinity = (value: any): boolean => {
-		return typeof value === "number" && !isFinite(value);
-	};
-
-	const isDate = (value: any): boolean => {
-		return typeof value === "object" && value !== null && typeof value.getMonth === "function";
-	};
-
-	const isUndefined = (value: any): boolean => {
-		return value === undefined && typeof value === "undefined";
-	};
-
-	const isFunction = (value: any): boolean => {
-		return typeof value === "function";
-	};
-
-	const isSymbol = (value: any): boolean => {
-		return typeof value === "symbol";
-	};
-
 	const restOfDataTypes = (value: any): boolean => {
 		return isNumber(value) || isString(value) || isBoolean(value);
 	};
