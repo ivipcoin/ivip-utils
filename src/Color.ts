@@ -726,5 +726,3 @@ export default class Color {
 		return result;
 	}
 }
-
-new Color("");

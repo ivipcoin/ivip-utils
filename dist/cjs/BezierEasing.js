@@ -155,14 +155,14 @@ class BezierEasing {
         }
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    to(x) {
+    to(t) {
         if (this.x1 === this.y1 && this.x2 === this.y2) {
-            return x;
+            return t;
         }
         const props = {
             x1: this.x1,
@@ -173,358 +173,358 @@ class BezierEasing {
             kSampleStepSize: this.kSampleStepSize,
             sampleValues: this.sampleValues,
         };
-        return x === 0 ? 0 : x === 1 ? 1 : calcBezier(getTForX(x, props), this.y1, this.y2);
+        return t === 0 ? 0 : t === 1 ? 1 : calcBezier(getTForX(t, props), this.y1, this.y2);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static linear(x) {
-        return x;
+    static linear(t) {
+        return t;
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static elastic(x) {
-        return elastic(x);
+    static elastic(t) {
+        return elastic(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static ease(x) {
-        return new BezierEasing(0.25, 0.1, 0.25, 1.0).to(x);
+    static ease(t) {
+        return new BezierEasing(0.25, 0.1, 0.25, 1.0).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeIn(x) {
-        return new BezierEasing(0.42, 0.0, 1.0, 1.0).to(x);
+    static easeIn(t) {
+        return new BezierEasing(0.42, 0.0, 1.0, 1.0).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInElastic(x) {
-        return easeInElastic(x);
+    static easeInElastic(t) {
+        return easeInElastic(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInBounce(x) {
-        return easeInBounce(x);
+    static easeInBounce(t) {
+        return easeInBounce(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInExpo(x) {
-        return new BezierEasing(0.95, 0.05, 0.795, 0.035).to(x);
+    static easeInExpo(t) {
+        return new BezierEasing(0.95, 0.05, 0.795, 0.035).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInSine(x) {
-        return new BezierEasing(0.47, 0, 0.75, 0.72).to(x);
+    static easeInSine(t) {
+        return new BezierEasing(0.47, 0, 0.75, 0.72).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInQuad(x) {
-        return new BezierEasing(0.55, 0.09, 0.68, 0.53).to(x);
+    static easeInQuad(t) {
+        return new BezierEasing(0.55, 0.09, 0.68, 0.53).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInCubic(x) {
-        return new BezierEasing(0.55, 0.06, 0.68, 0.19).to(x);
+    static easeInCubic(t) {
+        return new BezierEasing(0.55, 0.06, 0.68, 0.19).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInBack(x) {
-        return new BezierEasing(0.6, -0.28, 0.74, 0.05).to(x);
+    static easeInBack(t) {
+        return new BezierEasing(0.6, -0.28, 0.74, 0.05).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInQuart(x) {
-        return new BezierEasing(0.895, 0.03, 0.685, 0.22).to(x);
+    static easeInQuart(t) {
+        return new BezierEasing(0.895, 0.03, 0.685, 0.22).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInQuint(x) {
-        return new BezierEasing(0.755, 0.05, 0.855, 0.06).to(x);
+    static easeInQuint(t) {
+        return new BezierEasing(0.755, 0.05, 0.855, 0.06).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInCirc(x) {
-        return new BezierEasing(0.6, 0.04, 0.98, 0.335).to(x);
+    static easeInCirc(t) {
+        return new BezierEasing(0.6, 0.04, 0.98, 0.335).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOut(x) {
-        return new BezierEasing(0.42, 0.0, 0.58, 1.0).to(x);
+    static easeInOut(t) {
+        return new BezierEasing(0.42, 0.0, 0.58, 1.0).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutElastic(x) {
-        return easeInOutElastic(x);
+    static easeInOutElastic(t) {
+        return easeInOutElastic(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutBounce(x) {
-        return easeInOutBounce(x);
+    static easeInOutBounce(t) {
+        return easeInOutBounce(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutSine(x) {
-        return new BezierEasing(0.45, 0.05, 0.55, 0.95).to(x);
+    static easeInOutSine(t) {
+        return new BezierEasing(0.45, 0.05, 0.55, 0.95).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutQuad(x) {
-        return new BezierEasing(0.46, 0.03, 0.52, 0.96).to(x);
+    static easeInOutQuad(t) {
+        return new BezierEasing(0.46, 0.03, 0.52, 0.96).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutCubic(x) {
-        return new BezierEasing(0.65, 0.05, 0.36, 1).to(x);
+    static easeInOutCubic(t) {
+        return new BezierEasing(0.65, 0.05, 0.36, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutBack(x) {
-        return new BezierEasing(0.68, -0.55, 0.27, 1.55).to(x);
+    static easeInOutBack(t) {
+        return new BezierEasing(0.68, -0.55, 0.27, 1.55).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutQuart(x) {
-        return new BezierEasing(0.77, 0, 0.175, 1).to(x);
+    static easeInOutQuart(t) {
+        return new BezierEasing(0.77, 0, 0.175, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutQuint(x) {
-        return new BezierEasing(0.86, 0, 0.07, 1).to(x);
+    static easeInOutQuint(t) {
+        return new BezierEasing(0.86, 0, 0.07, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutExpo(x) {
-        return new BezierEasing(1, 0, 0, 1).to(x);
+    static easeInOutExpo(t) {
+        return new BezierEasing(1, 0, 0, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeInOutCirc(x) {
-        return new BezierEasing(0.785, 0.135, 0.15, 0.86).to(x);
+    static easeInOutCirc(t) {
+        return new BezierEasing(0.785, 0.135, 0.15, 0.86).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOut(x) {
-        return new BezierEasing(0.0, 0.0, 0.58, 1.0).to(x);
+    static easeOut(t) {
+        return new BezierEasing(0.0, 0.0, 0.58, 1.0).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutElastic(x) {
-        return easeOutElastic(x);
+    static easeOutElastic(t) {
+        return easeOutElastic(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutBounce(x) {
-        return easeOutBounce(x);
+    static easeOutBounce(t) {
+        return easeOutBounce(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutSine(x) {
-        return new BezierEasing(0.39, 0.58, 0.57, 1).to(x);
+    static easeOutSine(t) {
+        return new BezierEasing(0.39, 0.58, 0.57, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutQuad(x) {
-        return new BezierEasing(0.25, 0.46, 0.45, 0.94).to(x);
+    static easeOutQuad(t) {
+        return new BezierEasing(0.25, 0.46, 0.45, 0.94).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutCubic(x) {
-        return new BezierEasing(0.22, 0.61, 0.36, 1).to(x);
+    static easeOutCubic(t) {
+        return new BezierEasing(0.22, 0.61, 0.36, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutBack(x) {
-        return new BezierEasing(0.18, 0.89, 0.32, 1.28).to(x);
+    static easeOutBack(t) {
+        return new BezierEasing(0.18, 0.89, 0.32, 1.28).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutQuart(x) {
-        return new BezierEasing(0.165, 0.84, 0.44, 1).to(x);
+    static easeOutQuart(t) {
+        return new BezierEasing(0.165, 0.84, 0.44, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutQuint(x) {
-        return new BezierEasing(0.23, 1, 0.32, 1).to(x);
+    static easeOutQuint(t) {
+        return new BezierEasing(0.23, 1, 0.32, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutExpo(x) {
-        return new BezierEasing(0.19, 1, 0.22, 1).to(x);
+    static easeOutExpo(t) {
+        return new BezierEasing(0.19, 1, 0.22, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static easeOutCirc(x) {
-        return new BezierEasing(0.075, 0.82, 0.165, 1).to(x);
+    static easeOutCirc(t) {
+        return new BezierEasing(0.075, 0.82, 0.165, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static fastOutSlowIn(x) {
-        return new BezierEasing(0.4, 0, 0.2, 1).to(x);
+    static fastOutSlowIn(t) {
+        return new BezierEasing(0.4, 0, 0.2, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static fastOutLinearIn(x) {
-        return new BezierEasing(0.4, 0, 1, 1).to(x);
+    static fastOutLinearIn(t) {
+        return new BezierEasing(0.4, 0, 1, 1).to(t);
     }
     /**
-     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor x fornecido.
+     * Calcula e retorna o valor interpolado correspondente à curva de Bezier para o valor t fornecido.
      *
-     * @param {number} x - O valor x para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
+     * @param {number} t - O valor t para o qual a interpolação deve ser calculada (deve estar no intervalo [0, 1])
      * @returns {number} - O valor interpolado correspondente à curva de Bezier
      */
-    static linearOutSlowIn(x) {
-        return new BezierEasing(0, 0, 0.2, 1).to(x);
+    static linearOutSlowIn(t) {
+        return new BezierEasing(0, 0, 0.2, 1).to(t);
     }
     /**
      * Função personalizada para agendar uma animação
@@ -537,19 +537,24 @@ class BezierEasing {
     static setInterval(func, delay = 1, duration = 1000, easing = "linear") {
         let elapsed = 0;
         let timerDelay, start = Date.now();
-        const loop = () => {
+        const loop = async () => {
+            var _a;
             if (elapsed > duration) {
+                clearTimeout(timerDelay);
                 return;
             }
-            const x = Math.min(1, elapsed / duration);
+            const t = Math.min(1, elapsed / duration);
             if (easing instanceof BezierEasing) {
-                func(easing.to(x));
+                await func(easing.to(t));
+            }
+            else if (typeof easing === "function") {
+                await func((_a = easing(t)) !== null && _a !== void 0 ? _a : 1);
             }
             else {
-                func(BezierEasing[easing](x));
+                await func(BezierEasing[easing](t));
             }
             elapsed = Date.now() - start;
-            timerDelay = setTimeout(loop, delay);
+            timerDelay = setTimeout(loop, delay - (elapsed % delay));
         };
         loop();
         return timerDelay;

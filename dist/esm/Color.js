@@ -667,5 +667,4 @@ class Color {
     }
 }
 exports.default = Color;
-new Color("");
 //# sourceMappingURL=Color.js.map
