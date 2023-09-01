@@ -397,8 +397,6 @@ Aqui está uma lista das funções de validação disponíveis no módulo `ivip-
 - `isUrlValid`: Verifica se uma URL é válida.
 - `isEmpty`: Verifica se um objeto está vazio, ou seja, se não possui propriedades próprias.
 
-Aqui está a documentação completa para o módulo `ascii85` importado de `ivip-utils`, que inclui as funções `encode` e `decode`:
-
 ## Módulo `ascii85` - Codificação e Decodificação ASCII85
 
 O módulo `ascii85` do pacote `ivip-utils` oferece funções para codificação e decodificação de dados usando o esquema de codificação ASCII85. O ASCII85 é um esquema de codificação binário para texto que é frequentemente usado para representar dados binários de forma legível em texto, principalmente em documentos PostScript e PDF.
