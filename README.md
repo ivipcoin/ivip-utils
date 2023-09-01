@@ -380,6 +380,7 @@ Aqui está uma lista das funções de validação disponíveis no módulo `ivip-
 - `isString`: Verifica se um valor é uma string.
 - `isBoolean`: Verifica se um valor é um booleano.
 - `isNumber`: Verifica se um valor é um número.
+- `isNumberValid`: Verifica se um valor é um número válida sendo uma string ou um número.
 - `isInt`: Verifica se um valor é um número inteiro.
 - `isFloat`: Verifica se um valor é um número de ponto flutuante.
 - `isNull`: Verifica se um valor é nulo.

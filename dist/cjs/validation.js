@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isEmpty = exports.isUrlValid = exports.isPhoneValid = exports.isPasswordValid = exports.isEmailValid = exports.isBuffer = exports.isSymbol = exports.isFunction = exports.isUndefined = exports.isDate = exports.isInfinity = exports.isNotNumber = exports.isNull = exports.isFloat = exports.isInt = exports.isNumber = exports.isBoolean = exports.isString = exports.isJson = exports.isObject = exports.isTypedArray = exports.isArray = void 0;
+exports.isEmpty = exports.isUrlValid = exports.isPhoneValid = exports.isPasswordValid = exports.isEmailValid = exports.isBuffer = exports.isSymbol = exports.isFunction = exports.isUndefined = exports.isDate = exports.isInfinity = exports.isNotNumber = exports.isNull = exports.isFloat = exports.isInt = exports.isNumberValid = exports.isNumber = exports.isBoolean = exports.isString = exports.isJson = exports.isObject = exports.isTypedArray = exports.isArray = void 0;
 const isArray = (value) => {
     return Array.isArray(value) && typeof value === "object";
 };
@@ -33,6 +33,15 @@ const isNumber = (value) => {
     return typeof value === "number" && Number(value) === value;
 };
 exports.isNumber = isNumber;
+const isNumberValid = (value) => {
+    if (typeof value === "number")
+        return true;
+    if (typeof value !== "string")
+        return false;
+    const num = parseFloat(value);
+    return !isNaN(num) && isFinite(num) && /^(\-)?\d+(\.\d+)?$/.test(value);
+};
+exports.isNumberValid = isNumberValid;
 const isInt = (value) => {
     return (0, exports.isNumber)(value) && value % 1 === 0;
 };

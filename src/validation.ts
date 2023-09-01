@@ -30,6 +30,13 @@ export const isNumber = (value: any): boolean => {
 	return typeof value === "number" && Number(value) === value;
 };
 
+export const isNumberValid = (value: any): boolean => {
+	if (typeof value === "number") return true;
+	if (typeof value !== "string") return false;
+	const num = parseFloat(value);
+	return !isNaN(num) && isFinite(num) && /^(\-)?\d+(\.\d+)?$/.test(value);
+};
+
 export const isInt = (value: any) => {
 	return isNumber(value) && value % 1 === 0;
 };

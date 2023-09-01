@@ -5,6 +5,7 @@ export declare const isJson: (value: any) => boolean;
 export declare const isString: (value: any) => boolean;
 export declare const isBoolean: (value: any) => boolean;
 export declare const isNumber: (value: any) => boolean;
+export declare const isNumberValid: (value: any) => boolean;
 export declare const isInt: (value: any) => boolean;
 export declare const isFloat: (value: any) => boolean;
 export declare const isNull: (value: any) => boolean;
