@@ -17,3 +17,5 @@ export { default as Color } from "./Color";
 export * as ColorUtils from "./Color";
 
 export { default as Ascii85 } from "./Ascii85";
+
+export { default as SimpleEventEmitter } from "./SimpleEventEmitter";

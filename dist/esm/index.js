@@ -29,7 +29,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Ascii85 = exports.ColorUtils = exports.Color = exports.BezierEasing = exports.Base64 = exports.gl = exports.mergeClasses = exports.JSONStringify = void 0;
+exports.SimpleEventEmitter = exports.Ascii85 = exports.ColorUtils = exports.Color = exports.BezierEasing = exports.Base64 = exports.gl = exports.mergeClasses = exports.JSONStringify = void 0;
 var JSONStringify_1 = require("./JSONStringify.js");
 Object.defineProperty(exports, "JSONStringify", { enumerable: true, get: function () { return __importDefault(JSONStringify_1).default; } });
 var mergeClasses_1 = require("./mergeClasses.js");
@@ -46,4 +46,6 @@ Object.defineProperty(exports, "Color", { enumerable: true, get: function () { r
 exports.ColorUtils = __importStar(require("./Color.js"));
 var Ascii85_1 = require("./Ascii85.js");
 Object.defineProperty(exports, "Ascii85", { enumerable: true, get: function () { return __importDefault(Ascii85_1).default; } });
+var SimpleEventEmitter_1 = require("./SimpleEventEmitter.js");
+Object.defineProperty(exports, "SimpleEventEmitter", { enumerable: true, get: function () { return __importDefault(SimpleEventEmitter_1).default; } });
 //# sourceMappingURL=index.js.map

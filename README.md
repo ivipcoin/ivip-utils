@@ -38,6 +38,18 @@ npm install ivip-utils
       - [`encode`](#encode)
       - [`decode`](#decode)
     - [Exemplo de Uso](#exemplo-de-uso)
+  - [Módulo SimpleEventEmitter](#módulo-simpleeventemitter)
+    - [Importação](#importação)
+    - [Construtor](#construtor)
+    - [Métodos](#métodos)
+      - [`on<T = any>(event: string, callback: (data: T) => void): SimpleEventEmitterProperty`](#ont--anyevent-string-callback-data-t--void-simpleeventemitterproperty)
+      - [`off<T = any>(event: string, callback?: (data: T) => void): this`](#offt--anyevent-string-callback-data-t--void-this)
+      - [`once<T = any>(event: string, callback?: (data: T) => void): Promise<T>`](#oncet--anyevent-string-callback-data-t--void-promiset)
+      - [`emit(event: string, data?: any): this`](#emitevent-string-data-any-this)
+      - [`emitOnce(event: string, data?: any): this`](#emitonceevent-string-data-any-this)
+      - [`pipe(event: string, eventEmitter: SimpleEventEmitter): SimpleEventEmitterProperty`](#pipeevent-string-eventemitter-simpleeventemitter-simpleeventemitterproperty)
+      - [`pipeOnce(event: string, eventEmitter: SimpleEventEmitter): Promise<any>`](#pipeonceevent-string-eventemitter-simpleeventemitter-promiseany)
+    - [Exemplo de Uso](#exemplo-de-uso-1)
   - [Módulo BezierEasing](#módulo-beziereasing)
     - [Recursos Principais](#recursos-principais)
     - [Como Usar](#como-usar)
@@ -432,6 +444,123 @@ console.log(encodedData); // Saída: <~87cUR~
 const decodedData = ascii85.decode(encodedData);
 console.log(decodedData); // Saída: Uint8Array [ 72, 101, 108, 108, 111 ]
 ```
+
+## Módulo SimpleEventEmitter
+
+O `SimpleEventEmitter` é uma classe que permite emitir e escutar eventos em seu código. É útil para criar uma comunicação eficaz entre diferentes partes de seu programa.
+
+### Importação
+
+```javascript
+import { SimpleEventEmitter } from 'ivip-utils';
+```
+
+### Construtor
+
+```javascript
+const emitter = new SimpleEventEmitter();
+```
+
+Cria uma instância de `SimpleEventEmitter` para que você possa começar a usar os métodos de emissão e escuta de eventos.
+
+### Métodos
+
+#### `on<T = any>(event: string, callback: (data: T) => void): SimpleEventEmitterProperty`
+
+Este método é usado para se inscrever em um evento específico. Quando o evento é emitido, a função de retorno de chamada especificada será executada. Retorna um objeto `SimpleEventEmitterProperty` que pode ser usado para cancelar a inscrição posteriormente.
+
+Exemplo:
+
+```javascript
+const subscription = emitter.on('eventoExemplo', (data) => {
+  console.log('Evento ocorreu:', data);
+});
+```
+
+#### `off<T = any>(event: string, callback?: (data: T) => void): this`
+
+Este método é usado para cancelar a inscrição de um evento específico. Se nenhum callback for fornecido, todas as inscrições para o evento serão canceladas.
+
+Exemplo:
+
+```javascript
+emitter.off('eventoExemplo', callback);
+```
+
+#### `once<T = any>(event: string, callback?: (data: T) => void): Promise<T>`
+
+Este método é semelhante ao `on`, mas a função de retorno de chamada será executada apenas uma vez quando o evento for emitido. Retorna uma promessa que será resolvida quando o evento for emitido.
+
+Exemplo:
+
+```javascript
+emitter.once('eventoExemplo').then((data) => {
+  console.log('Evento ocorreu apenas uma vez:', data);
+});
+```
+
+#### `emit(event: string, data?: any): this`
+
+Este método é usado para emitir um evento com dados opcionais. Todos os ouvintes registrados para o evento serão acionados.
+
+Exemplo:
+
+```javascript
+emitter.emit('eventoExemplo', { message: 'Olá, mundo!' });
+```
+
+#### `emitOnce(event: string, data?: any): this`
+
+Este método é semelhante ao `emit`, mas os ouvintes registrados com `once` serão acionados apenas uma vez.
+
+Exemplo:
+
+```javascript
+emitter.emitOnce('eventoExemplo', { message: 'Olá, mundo!' });
+```
+
+#### `pipe(event: string, eventEmitter: SimpleEventEmitter): SimpleEventEmitterProperty`
+
+Este método é usado para redirecionar eventos de outro `SimpleEventEmitter`. Quando o evento especificado ocorrer no `eventEmitter` fornecido, ele será reemitido no `SimpleEventEmitter` atual.
+
+Exemplo:
+
+```javascript
+emitter.pipe('eventoExterno', externalEmitter);
+```
+
+#### `pipeOnce(event: string, eventEmitter: SimpleEventEmitter): Promise<any>`
+
+Este método é semelhante ao `pipe`, mas para eventos registrados com `once` no `eventEmitter` fornecido.
+
+Exemplo:
+
+```javascript
+emitter.pipeOnce('eventoExterno', externalEmitter).then((data) => {
+  console.log('Evento reemitido apenas uma vez:', data);
+});
+```
+
+### Exemplo de Uso
+
+```javascript
+import { SimpleEventEmitter } from 'ivip-utils';
+
+class Exemplo extends SimpleEventEmitter {
+  constructor() {
+    super();
+    this.on('eventoExemplo', (data) => {
+      console.log('Evento ocorreu:', data);
+    });
+
+    this.emit('eventoExemplo', { mensagem: 'Exemplo de evento' });
+  }
+}
+
+const exemplo = new Exemplo();
+```
+
+Neste exemplo, uma classe `Exemplo` herda `SimpleEventEmitter` para que possa usar todos os métodos de emissão e escuta de eventos. Ele se inscreve em um evento chamado 'eventoExemplo' e emite esse evento com dados. Quando o evento é emitido, a função de retorno de chamada é chamada e exibe uma mensagem no console.
 
 ## Módulo BezierEasing
 
