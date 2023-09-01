@@ -2,6 +2,9 @@ export const isArray = (value: any): boolean => {
 	return Array.isArray(value) && typeof value === "object";
 };
 
+export const isTypedArray = (val: any) =>
+	typeof val === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(val.constructor.name);
+
 export const isObject = (value: any): boolean => {
 	return typeof value === "object" && value !== null && !Array.isArray(value);
 };
@@ -102,3 +105,12 @@ export const isUrlValid = (url: string): boolean => {
 
 	return regex.test(url);
 };
+
+export function isEmpty(obj: object): obj is {} {
+	for (const key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			return false;
+		}
+	}
+	return true;
+}

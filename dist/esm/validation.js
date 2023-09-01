@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isUrlValid = exports.isPhoneValid = exports.isPasswordValid = exports.isEmailValid = exports.isBuffer = exports.isSymbol = exports.isFunction = exports.isUndefined = exports.isDate = exports.isInfinity = exports.isNotNumber = exports.isNull = exports.isFloat = exports.isInt = exports.isNumber = exports.isBoolean = exports.isString = exports.isJson = exports.isObject = exports.isArray = void 0;
+exports.isEmpty = exports.isUrlValid = exports.isPhoneValid = exports.isPasswordValid = exports.isEmailValid = exports.isBuffer = exports.isSymbol = exports.isFunction = exports.isUndefined = exports.isDate = exports.isInfinity = exports.isNotNumber = exports.isNull = exports.isFloat = exports.isInt = exports.isNumber = exports.isBoolean = exports.isString = exports.isJson = exports.isObject = exports.isTypedArray = exports.isArray = void 0;
 const isArray = (value) => {
     return Array.isArray(value) && typeof value === "object";
 };
 exports.isArray = isArray;
+const isTypedArray = (val) => typeof val === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(val.constructor.name);
+exports.isTypedArray = isTypedArray;
 const isObject = (value) => {
     return typeof value === "object" && value !== null && !Array.isArray(value);
 };
@@ -105,4 +107,13 @@ const isUrlValid = (url) => {
     return regex.test(url);
 };
 exports.isUrlValid = isUrlValid;
+function isEmpty(obj) {
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            return false;
+        }
+    }
+    return true;
+}
+exports.isEmpty = isEmpty;
 //# sourceMappingURL=validation.js.map

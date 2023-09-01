@@ -16,18 +16,28 @@ npm install ivip-utils
   - [Instalação](#instalação)
   - [Índice](#índice)
   - [Funções de Utilitário](#funções-de-utilitário)
-    - [Uso Básico](#uso-básico)
-      - [Utilizando `asyncForEach` para iterar assincronamente sobre uma matriz:](#utilizando-asyncforeach-para-iterar-assincronamente-sobre-uma-matriz)
-      - [Gerando um UUID v4 usando `uuidv4`:](#gerando-um-uuid-v4-usando-uuidv4)
     - [Documentação](#documentação)
       - [`asyncForEach`](#asyncforeach)
       - [`uuidv4`](#uuidv4)
+      - [`contains`](#contains)
+      - [`safeGet`](#safeget)
+      - [`deepEqual`](#deepequal)
+      - [`getGlobalObject`](#getglobalobject)
+      - [`defer`](#defer)
+      - [`encodeString`](#encodestring)
+      - [`decodeString`](#decodestring)
+      - [`numberToBytes` e `bytesToNumber`](#numbertobytes-e-bytestonumber)
   - [Funções de Validação](#funções-de-validação)
-    - [Uso Básico](#uso-básico-1)
+    - [Uso Básico](#uso-básico)
       - [Verificando se um valor é uma matriz:](#verificando-se-um-valor-é-uma-matriz)
       - [Verificando se um valor é uma string:](#verificando-se-um-valor-é-uma-string)
       - [Verificando se um valor é um objeto:](#verificando-se-um-valor-é-um-objeto)
     - [Lista de Funções de Validação](#lista-de-funções-de-validação)
+  - [Módulo `ascii85` - Codificação e Decodificação ASCII85](#módulo-ascii85---codificação-e-decodificação-ascii85)
+    - [Funções Disponíveis](#funções-disponíveis)
+      - [`encode`](#encode)
+      - [`decode`](#decode)
+    - [Exemplo de Uso](#exemplo-de-uso)
   - [Módulo BezierEasing](#módulo-beziereasing)
     - [Recursos Principais](#recursos-principais)
     - [Como Usar](#como-usar)
@@ -41,25 +51,25 @@ npm install ivip-utils
       - [Escurecimento e Clareamento](#escurecimento-e-clareamento)
       - [Mistura de Cores](#mistura-de-cores)
   - [Classe Base64](#classe-base64)
-    - [Uso Básico](#uso-básico-2)
+    - [Uso Básico](#uso-básico-1)
     - [Recursos](#recursos-1)
       - [Codificação e Decodificação](#codificação-e-decodificação)
       - [Manipulação de Dados UTF-8](#manipulação-de-dados-utf-8)
   - [Módulo JSONStringify](#módulo-jsonstringify)
-    - [Uso Básico](#uso-básico-3)
+    - [Uso Básico](#uso-básico-2)
     - [Recursos](#recursos-2)
       - [Função de Serialização](#função-de-serialização)
       - [Uso Conveniente](#uso-conveniente)
   - [Módulo mergeClasses](#módulo-mergeclasses)
-    - [Uso Básico](#uso-básico-4)
+    - [Uso Básico](#uso-básico-3)
     - [Recursos](#recursos-3)
       - [Mesclagem de Classes](#mesclagem-de-classes)
       - [Uso Conveniente](#uso-conveniente-1)
   - [Módulo `gl`](#módulo-gl)
-    - [Funções Disponíveis](#funções-disponíveis)
+    - [Funções Disponíveis](#funções-disponíveis-1)
       - [Funções de Matriz 4x4](#funções-de-matriz-4x4)
     - [Módulo `mat4` - Manipulação de Matrizes 4x4](#módulo-mat4---manipulação-de-matrizes-4x4)
-      - [Funções Disponíveis](#funções-disponíveis-1)
+      - [Funções Disponíveis](#funções-disponíveis-2)
         - [`adjoint`](#adjoint)
         - [`clone`](#clone)
         - [`copy`](#copy)
@@ -98,31 +108,8 @@ O módulo `ivip-utils` oferece uma coleção de funções de utilitário, inclui
 
 Você pode importar as funções de utilitário individualmente em seu código, conforme necessário. Aqui estão alguns exemplos de importações:
 
-```javascript
+```typescript
 import { asyncForEach, uuidv4 } from 'ivip-utils';
-```
-
-### Uso Básico
-
-Aqui estão alguns exemplos de como usar as funções de utilitário `asyncForEach` e `uuidv4` em seu código:
-
-#### Utilizando `asyncForEach` para iterar assincronamente sobre uma matriz:
-
-```javascript
-const array = [1, 2, 3, 4, 5];
-
-asyncForEach(array, async (item, index) => {
-  // Simular uma operação assíncrona, como uma consulta de banco de dados
-  await databaseQuery(item);
-  console.log(`Item ${item} processado na posição ${index}`);
-});
-```
-
-#### Gerando um UUID v4 usando `uuidv4`:
-
-```javascript
-const uuid = uuidv4();
-console.log(`UUID gerado: ${uuid}`);
 ```
 
 ### Documentação
@@ -136,9 +123,190 @@ A função `asyncForEach` permite iterar sobre uma matriz de forma assíncrona, 
 - `array`: A matriz que você deseja iterar.
 - `callback`: A função de retorno de chamada que será aplicada a cada elemento. Deve retornar uma `Promise`.
 
+```typescript
+import { asyncForEach } from 'ivip-utils';
+
+async function asyncExample() {
+  const numbers = [1, 2, 3, 4, 5];
+
+  await asyncForEach(numbers, async (number, index) => {
+    // Simula um trabalho assíncrono
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    console.log(`Processed ${number} at index ${index}`);
+  });
+
+  console.log('Async loop completed');
+}
+
+asyncExample();
+```
+
 #### `uuidv4`
 
-A função `uuidv4` gera um identificador único universal (UUID) versão 4. Esses UUIDs são frequentemente usados para identificar exclusivamente recursos em aplicativos e sistemas distribuídos.
+A função `uuidv4` gera um identificador único universal (UUID) no formato versão 4.
+
+- Retorna uma string que representa um UUID v4.
+
+```typescript
+import { uuidv4 } from 'ivip-utils';
+
+const generatedUUID = uuidv4();
+
+console.log('Generated UUID:', generatedUUID);
+```
+
+#### `contains`
+
+A função `contains` verifica se um objeto contém uma chave específica.
+
+- `obj`: O objeto a ser verificado.
+- `key`: A chave a ser procurada no objeto.
+- Retorna `true` se a chave existir no objeto, caso contrário, retorna `false`.
+
+```typescript
+import { contains } from 'ivip-utils';
+
+const person = { name: 'John', age: 30 };
+
+const hasName = contains(person, 'name');
+const hasAddress = contains(person, 'address');
+
+console.log('Has name property:', hasName); // true
+console.log('Has address property:', hasAddress); // false
+```
+
+#### `safeGet`
+
+A função `safeGet` permite acessar seguramente uma propriedade aninhada de um objeto, evitando erros se a propriedade não existir.
+
+- `obj`: O objeto de onde a propriedade será acessada.
+- `key`: A chave da propriedade a ser acessada no objeto.
+- Retorna o valor da propriedade se ela existir, ou `undefined` se não existir.
+
+```typescript
+import { safeGet } from 'ivip-utils';
+
+const person = { name: 'John', address: { city: 'New York' } };
+
+const cityName = safeGet(person, 'address.city');
+const countryName = safeGet(person, 'address.country');
+
+console.log('City name:', cityName); // 'New York'
+console.log('Country name:', countryName); // undefined
+```
+
+#### `deepEqual`
+
+A função `deepEqual` verifica se dois objetos são iguais em profundidade, suportando arrays e objetos aninhados.
+
+- `a` e `b`: Os objetos a serem comparados.
+- Retorna `true` se os objetos forem iguais em profundidade, caso contrário, retorna `false`.
+
+```typescript
+import { deepEqual } from 'ivip-utils';
+
+const obj1 = { a: 1, b: { c: 2 } };
+const obj2 = { a: 1, b: { c: 2 } };
+const obj3 = { a: 1, b: { c: 3 } };
+
+console.log('Objects are deep equal:', deepEqual(obj1, obj2)); // true
+console.log('Objects are deep equal:', deepEqual(obj1, obj3)); // false
+```
+
+#### `getGlobalObject`
+
+A função `getGlobalObject` retorna o objeto global correspondente ao ambiente em que o código está sendo executado (por exemplo, `window` no navegador ou `global` no Node.js).
+
+- Retorna o objeto global.
+
+```typescript
+import { getGlobalObject } from 'ivip-utils';
+
+const globalObject = getGlobalObject();
+
+console.log('Global object:', globalObject);
+```
+
+#### `defer`
+
+A função `defer` permite agendar a execução de uma função para o próximo ciclo de microtarefas.
+
+- `fn`: A função a ser agendada para execução.
+
+```typescript
+import { defer } from 'ivip-utils';
+
+function exampleFunction() {
+  console.log('Function executed');
+}
+
+const deferredFunction = defer(exampleFunction);
+
+console.log('Deferred function scheduled');
+
+// Output:
+// Deferred function scheduled
+// Function executed
+```
+
+#### `encodeString`
+
+A função `encodeString` converte uma string em uma matriz Uint8Array codificada em UTF-8.
+
+- `str`: A string a ser codificada.
+- Retorna uma matriz Uint8Array representando a codificação UTF-8 da string.
+
+```typescript
+import { encodeString } from 'ivip-utils';
+
+const originalString = 'Hello, world!';
+
+const encodedData = encodeString(originalString);
+
+console.log('Original string:', originalString);
+console.log('Encoded data:', encodedData);
+```
+
+#### `decodeString`
+
+A função `decodeString` converte uma matriz Uint8Array ou array de números em uma string decodificada em UTF-8.
+
+- `buffer`: A matriz Uint8Array, array de números ou TypedArrayLike a ser decodificado.
+- Retorna a string decodificada.
+
+```typescript
+import { encodeString, decodeString } from 'ivip-utils';
+
+const originalString = 'Hello, world!';
+
+const encodedData = encodeString(originalString);
+const decodedString = decodeString(encodedData);
+
+console.log('Original string:', originalString);
+console.log('Encoded data:', encodedData);
+console.log('Decoded string:', decodedString);
+```
+
+#### `numberToBytes` e `bytesToNumber`
+
+As funções `numberToBytes` e `bytesToNumber` convertem um número em uma matriz de bytes e vice-versa.
+
+- `numberToBytes(number)`: Converte um número em uma matriz de bytes.
+- `bytesToNumber(bytes)`: Converte uma matriz de bytes em um número.
+
+```typescript
+import { numberToBytes, bytesToNumber } from 'ivip-utils';
+
+const originalNumber = 42;
+
+const byteArray = numberToBytes(originalNumber);
+const reconstructedNumber = bytesToNumber(byteArray);
+
+console.log('Original number:', originalNumber);
+console.log('Byte array:', byteArray);
+console.log('Reconstructed number:', reconstructedNumber);
+```
 
 ## Funções de Validação
 
@@ -146,7 +314,7 @@ O módulo `ivip-utils` oferece uma coleção de funções de validação para ve
 
 Você pode importar as funções de validação individualmente em seu código, conforme necessário. Aqui estão alguns exemplos de importações:
 
-```javascript
+```typescript
 import { isArray, isObject, isString } from 'ivip-utils/validation';
 ```
 
@@ -156,7 +324,7 @@ Aqui estão alguns exemplos de como usar as funções de validação em seu cód
 
 #### Verificando se um valor é uma matriz:
 
-```javascript
+```typescript
 const value = [1, 2, 3];
 if (isArray(value)) {
   console.log('O valor é uma matriz.');
@@ -167,7 +335,7 @@ if (isArray(value)) {
 
 #### Verificando se um valor é uma string:
 
-```javascript
+```typescript
 const value = 'Olá, mundo!';
 if (isString(value)) {
   console.log('O valor é uma string.');
@@ -178,7 +346,7 @@ if (isString(value)) {
 
 #### Verificando se um valor é um objeto:
 
-```javascript
+```typescript
 const value = { name: 'John', age: 30 };
 if (isObject(value)) {
   console.log('O valor é um objeto.');
@@ -194,6 +362,7 @@ Você pode usar as funções de validação apropriadas para o tipo de valor que
 Aqui está uma lista das funções de validação disponíveis no módulo `ivip-utils`:
 
 - `isArray`: Verifica se um valor é uma matriz.
+- `isTypedArray`: Verifica se um valor é uma matriz tipada ou instanciado.
 - `isObject`: Verifica se um valor é um objeto.
 - `isJson`: Verifica se um valor é uma string JSON válida.
 - `isString`: Verifica se um valor é uma string.
@@ -213,6 +382,56 @@ Aqui está uma lista das funções de validação disponíveis no módulo `ivip-
 - `isPasswordValid`: Verifica se uma senha atende aos critérios de validação.
 - `isPhoneValid`: Verifica se um número de telefone é válido.
 - `isUrlValid`: Verifica se uma URL é válida.
+- `isEmpty`: Verifica se um objeto está vazio, ou seja, se não possui propriedades próprias.
+
+Aqui está a documentação completa para o módulo `ascii85` importado de `ivip-utils`, que inclui as funções `encode` e `decode`:
+
+## Módulo `ascii85` - Codificação e Decodificação ASCII85
+
+O módulo `ascii85` do pacote `ivip-utils` oferece funções para codificação e decodificação de dados usando o esquema de codificação ASCII85. O ASCII85 é um esquema de codificação binário para texto que é frequentemente usado para representar dados binários de forma legível em texto, principalmente em documentos PostScript e PDF.
+
+Você pode importar as funções do módulo `ascii85` conforme necessário. Aqui está um exemplo de importação:
+
+```typescript
+import ascii85 from 'ivip-utils/Ascii85';
+```
+
+### Funções Disponíveis
+
+O módulo `ascii85` inclui duas funções principais para codificação e decodificação de dados:
+
+#### `encode`
+
+A função `encode` codifica um array de bytes (por exemplo, ArrayBuffer, Uint8Array ou array de números) em uma string ASCII85.
+
+- `arr`: O array de bytes a ser codificado.
+- Retorna a string ASCII85 resultante.
+
+#### `decode`
+
+A função `decode` decodifica uma string ASCII85 em um ArrayBuffer.
+
+- `input`: A string ASCII85 a ser decodificada.
+- Retorna um ArrayBuffer que contém os dados decodificados.
+
+### Exemplo de Uso
+
+Aqui está um exemplo de uso das funções `encode` e `decode` do módulo `ascii85`:
+
+```typescript
+import ascii85 from 'ivip-utils/Ascii85';
+
+// Dados binários para codificar
+const binaryData = new Uint8Array([72, 101, 108, 108, 111]); // "Hello" em ASCII
+
+// Codifica os dados em uma string ASCII85
+const encodedData = ascii85.encode(binaryData);
+console.log(encodedData); // Saída: <~87cUR~
+
+// Decodifica a string ASCII85 em dados binários
+const decodedData = ascii85.decode(encodedData);
+console.log(decodedData); // Saída: Uint8Array [ 72, 101, 108, 108, 111 ]
+```
 
 ## Módulo BezierEasing
 
@@ -442,7 +661,7 @@ A classe `Base64` é uma parte da biblioteca `ivip-utils` e é projetada para fa
 
 Aqui estão alguns exemplos de uso básico da classe `Base64`:
 
-```javascript
+```typescript
 import { Base64 } from 'ivip-utils';
 
 // Codificar uma string em Base64
@@ -466,7 +685,7 @@ Neste exemplo, criamos uma instância da classe `Base64` e usamos os métodos `e
 
 Você pode usar os métodos `encode` e `decode` para codificar e decodificar strings em Base64:
 
-```javascript
+```typescript
 const encodedString = Base64.encode('Hello, World!'); // Codifica a string
 const decodedString = Base64.decode(encodedString); // Decodifica a string
 ```
@@ -475,7 +694,7 @@ const decodedString = Base64.decode(encodedString); // Decodifica a string
 
 A classe `Base64` oferece métodos estáticos para manipulação de dados UTF-8, como `utf8_encode` e `utf8_decode`:
 
-```javascript
+```typescript
 const utf8EncodedString = Base64.utf8_encode('Olá, Mundo!'); // Codifica em UTF-8
 const utf8DecodedString = Base64.utf8_decode(utf8EncodedString); // Decodifica de UTF-8
 ```
@@ -490,7 +709,7 @@ O módulo `JSONStringify` é uma parte da biblioteca `ivip-utils` e fornece uma 
 
 Aqui está um exemplo simples de como usar a função `JSONStringify`:
 
-```javascript
+```typescript
 import { JSONStringify } from 'ivip-utils';
 
 const obj = {
@@ -512,7 +731,7 @@ Neste exemplo, importamos a função `JSONStringify` e a usamos para transformar
 
 O módulo `JSONStringify` fornece uma função simples para serializar objetos JavaScript em strings JSON.
 
-```javascript
+```typescript
 const jsonString = JSONStringify(obj);
 ```
 
@@ -530,7 +749,7 @@ O módulo `mergeClasses` é uma parte da biblioteca `ivip-utils` e fornece uma f
 
 Aqui está um exemplo simples de como usar a função `mergeClasses`:
 
-```javascript
+```typescript
 import { mergeClasses } from 'ivip-utils';
 
 class ClassA {
@@ -560,7 +779,7 @@ Neste exemplo, temos duas classes, `ClassA` e `ClassB`, cada uma com seu própri
 
 O módulo `mergeClasses` oferece uma função poderosa para mesclar duas classes de objetos JavaScript, combinando seus parâmetros e propriedades em uma única classe.
 
-```javascript
+```typescript
 const mergedClass = mergeClasses(ClassA, ClassB);
 ```
 
@@ -576,7 +795,7 @@ O módulo `gl` do pacote `ivip-utils` oferece uma série de funções úteis par
 
 Você pode importar as funções do módulo `gl` conforme necessário. Aqui está um exemplo de importação:
 
-```javascript
+```typescript
 import * as gl from 'ivip-utils/gl';
 ```
 
@@ -594,7 +813,7 @@ O módulo `mat4` do pacote `ivip-utils/gl` oferece uma série de funções para 
 
 Você pode importar as funções de matriz 4x4 individualmente em seu código, conforme necessário. Aqui estão alguns exemplos de importações:
 
-```javascript
+```typescript
 import { mat4 } from 'ivip-utils/gl';
 ```
 

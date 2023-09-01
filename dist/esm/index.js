@@ -29,11 +29,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uuidv4 = exports.asyncForEach = exports.ColorUtils = exports.Color = exports.BezierEasing = exports.Base64 = exports.gl = exports.mergeClasses = exports.JSONStringify = void 0;
+exports.Ascii85 = exports.ColorUtils = exports.Color = exports.BezierEasing = exports.Base64 = exports.gl = exports.mergeClasses = exports.JSONStringify = void 0;
 var JSONStringify_1 = require("./JSONStringify.js");
 Object.defineProperty(exports, "JSONStringify", { enumerable: true, get: function () { return __importDefault(JSONStringify_1).default; } });
 var mergeClasses_1 = require("./mergeClasses.js");
 Object.defineProperty(exports, "mergeClasses", { enumerable: true, get: function () { return __importDefault(mergeClasses_1).default; } });
+__exportStar(require("./utils.js"), exports);
 __exportStar(require("./validation.js"), exports);
 exports.gl = __importStar(require("./gl/index.js"));
 var Base64_1 = require("./Base64.js");
@@ -43,25 +44,6 @@ Object.defineProperty(exports, "BezierEasing", { enumerable: true, get: function
 var Color_1 = require("./Color.js");
 Object.defineProperty(exports, "Color", { enumerable: true, get: function () { return __importDefault(Color_1).default; } });
 exports.ColorUtils = __importStar(require("./Color.js"));
-const asyncForEach = (array, callback) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            for (let i = 0; i < array.length; i++) {
-                await callback(array[i], i, array);
-            }
-            resolve();
-        }
-        catch (e) {
-            reject(e);
-        }
-    });
-};
-exports.asyncForEach = asyncForEach;
-function uuidv4() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-        const r = (Math.random() * 16) | 0, v = c === "x" ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-    });
-}
-exports.uuidv4 = uuidv4;
+var Ascii85_1 = require("./Ascii85.js");
+Object.defineProperty(exports, "Ascii85", { enumerable: true, get: function () { return __importDefault(Ascii85_1).default; } });
 //# sourceMappingURL=index.js.map

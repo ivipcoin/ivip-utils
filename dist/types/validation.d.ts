@@ -1,4 +1,5 @@
 export declare const isArray: (value: any) => boolean;
+export declare const isTypedArray: (val: any) => boolean;
 export declare const isObject: (value: any) => boolean;
 export declare const isJson: (value: any) => boolean;
 export declare const isString: (value: any) => boolean;
@@ -18,4 +19,5 @@ export declare const isEmailValid: (email: string) => boolean;
 export declare const isPasswordValid: (password: string) => boolean;
 export declare const isPhoneValid: (phone: string) => boolean;
 export declare const isUrlValid: (url: string) => boolean;
+export declare function isEmpty(obj: object): obj is {};
 //# sourceMappingURL=validation.d.ts.map
