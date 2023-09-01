@@ -699,8 +699,6 @@ const utf8EncodedString = Base64.utf8_encode('Olá, Mundo!'); // Codifica em UTF
 const utf8DecodedString = Base64.utf8_decode(utf8EncodedString); // Decodifica de UTF-8
 ```
 
-Aqui está um exemplo de README para o módulo `JSONStringify`:
-
 ## Módulo JSONStringify
 
 O módulo `JSONStringify` é uma parte da biblioteca `ivip-utils` e fornece uma função simples para transformar um objeto JavaScript em uma string JSON. Esta função é útil quando você precisa serializar um objeto para poder transmiti-lo, armazená-lo ou transferi-lo de forma mais conveniente.
@@ -738,8 +736,6 @@ const jsonString = JSONStringify(obj);
 #### Uso Conveniente
 
 A serialização de objetos é uma tarefa comum ao trabalhar com dados em JavaScript. O `JSONStringify` torna essa tarefa mais conveniente, permitindo que você transforme objetos em strings JSON com facilidade.
-
-Aqui está um exemplo de README para o módulo `mergeClasses`:
 
 ## Módulo mergeClasses
 
