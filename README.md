@@ -27,6 +27,7 @@ npm install ivip-utils
       - [`encodeString`](#encodestring)
       - [`decodeString`](#decodestring)
       - [`numberToBytes` e `bytesToNumber`](#numbertobytes-e-bytestonumber)
+      - [`getAllUrlParams`](#getallurlparams)
   - [Funções de Validação](#funções-de-validação)
     - [Uso Básico](#uso-básico)
       - [Verificando se um valor é uma matriz:](#verificando-se-um-valor-é-uma-matriz)
@@ -319,6 +320,41 @@ console.log('Original number:', originalNumber);
 console.log('Byte array:', byteArray);
 console.log('Reconstructed number:', reconstructedNumber);
 ```
+
+Claro, aqui está o README para a função `getAllUrlParams` importada de `ivip-utils`:
+
+---
+
+#### `getAllUrlParams`
+
+A função `getAllUrlParams` é usada para obter todos os parâmetros de consulta de uma URL ou da URL atual do navegador. Ela retorna um objeto contendo todos os parâmetros de consulta como pares chave-valor.
+
+- `getAllUrlParams(url?)`: Obtém todos os parâmetros de consulta de uma URL fornecida ou da URL atual do navegador.
+
+```typescript
+import { getAllUrlParams } from 'ivip-utils';
+
+// Suponha que a URL seja "https://exemplo.com/?nome=John&idade=30&interesses=programação&interesses=viagens"
+const url = "https://exemplo.com/?nome=John&idade=30&interesses=programação&interesses=viagens";
+
+const params = getAllUrlParams(url);
+
+console.log(params);
+```
+
+No exemplo acima, a função `getAllUrlParams` analisa a URL fornecida e retorna um objeto contendo os parâmetros de consulta como pares chave-valor. O resultado será:
+
+```javascript
+{
+  nome: 'John',
+  idade: '30',
+  interesses: ['programação', 'viagens']
+}
+```
+
+Observe que os valores dos parâmetros são sempre retornados como strings. Se um parâmetro tiver múltiplos valores (como `interesses` no exemplo acima), eles serão retornados como um array.
+
+Esta função é útil para extrair informações de URLs, como parâmetros de consulta em aplicativos da web ou links de consulta.
 
 ## Funções de Validação
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bytesToNumber = exports.numberToBytes = exports.decodeString = exports.encodeString = exports.defer = exports.getGlobalObject = exports.deepEqual = exports.safeGet = exports.contains = exports.uuidv4 = exports.asyncForEach = void 0;
+exports.getAllUrlParams = exports.bytesToNumber = exports.numberToBytes = exports.decodeString = exports.encodeString = exports.defer = exports.getGlobalObject = exports.deepEqual = exports.safeGet = exports.contains = exports.uuidv4 = exports.asyncForEach = void 0;
 const validation_1 = require("./validation.js");
 const asyncForEach = (array, callback) => {
     return new Promise(async (resolve, reject) => {
@@ -256,4 +256,47 @@ function bytesToNumber(bytes) {
     return nr;
 }
 exports.bytesToNumber = bytesToNumber;
+function getAllUrlParams(url) {
+    let queryString = url ? url.split("?")[1] : window.location.search.slice(1);
+    let obj = {};
+    if (queryString) {
+        queryString = queryString.split("#")[0];
+        let arr = queryString.split("&");
+        for (let i = 0; i < arr.length; i++) {
+            let a = arr[i].split("=");
+            let paramName = a[0];
+            let paramValue = typeof a[1] === "undefined" ? true : a[1];
+            paramName = paramName.toLowerCase();
+            if (typeof paramValue === "string") {
+                paramValue = paramValue.toLowerCase();
+            }
+            if (/\[(\d+)?\]$/.test(paramName)) {
+                let key = paramName.replace(/\[(\d+)?\]/, "");
+                if (!obj[key])
+                    obj[key] = [];
+                if (/\[\d+\]$/.test(paramName)) {
+                    let index = parseInt(/\[(\d+)\]/.exec(paramName)[1]);
+                    obj[key][index] = paramValue;
+                }
+                else {
+                    obj[key].push(paramValue);
+                }
+            }
+            else {
+                if (!obj[paramName]) {
+                    obj[paramName] = paramValue;
+                }
+                else if (obj[paramName] && typeof obj[paramName] === "string") {
+                    obj[paramName] = [obj[paramName]];
+                    obj[paramName].push(paramValue);
+                }
+                else {
+                    obj[paramName].push(paramValue);
+                }
+            }
+        }
+    }
+    return obj;
+}
+exports.getAllUrlParams = getAllUrlParams;
 //# sourceMappingURL=utils.js.map

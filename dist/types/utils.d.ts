@@ -24,5 +24,8 @@ export declare function encodeString(str: string): Uint8Array;
 export declare function decodeString(buffer: TypedArrayLike | TypedArray | number[]): string;
 export declare function numberToBytes(number: number): number[];
 export declare function bytesToNumber(bytes: TypedArrayLike | TypedArray | number[]): number;
+export declare function getAllUrlParams(url?: string): {
+    [key: string]: any;
+};
 export {};
 //# sourceMappingURL=utils.d.ts.map
