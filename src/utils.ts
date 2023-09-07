@@ -299,3 +299,15 @@ export function getAllUrlParams(url?: string): { [key: string]: any } {
 
 	return obj;
 }
+
+export function objectToUrlParams(obj: { [key: string]: any }): string {
+	return Object.keys(obj)
+		.map((key) => {
+			const value = obj[key];
+			if (Array.isArray(value)) {
+				return value.map((val) => `${encodeURIComponent(key)}[]=${encodeURIComponent(val)}`).join("&");
+			}
+			return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+		})
+		.join("&");
+}

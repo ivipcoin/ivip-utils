@@ -28,6 +28,7 @@ npm install ivip-utils
       - [`decodeString`](#decodestring)
       - [`numberToBytes` e `bytesToNumber`](#numbertobytes-e-bytestonumber)
       - [`getAllUrlParams`](#getallurlparams)
+      - [`objectToUrlParams`](#objecttourlparams)
   - [Funções de Validação](#funções-de-validação)
     - [Uso Básico](#uso-básico)
       - [Verificando se um valor é uma matriz:](#verificando-se-um-valor-é-uma-matriz)
@@ -321,10 +322,6 @@ console.log('Byte array:', byteArray);
 console.log('Reconstructed number:', reconstructedNumber);
 ```
 
-Claro, aqui está o README para a função `getAllUrlParams` importada de `ivip-utils`:
-
----
-
 #### `getAllUrlParams`
 
 A função `getAllUrlParams` é usada para obter todos os parâmetros de consulta de uma URL ou da URL atual do navegador. Ela retorna um objeto contendo todos os parâmetros de consulta como pares chave-valor.
@@ -355,6 +352,41 @@ No exemplo acima, a função `getAllUrlParams` analisa a URL fornecida e retorna
 Observe que os valores dos parâmetros são sempre retornados como strings. Se um parâmetro tiver múltiplos valores (como `interesses` no exemplo acima), eles serão retornados como um array.
 
 Esta função é útil para extrair informações de URLs, como parâmetros de consulta em aplicativos da web ou links de consulta.
+
+#### `objectToUrlParams`
+
+A função `objectToUrlParams` converte um objeto JavaScript em uma string de parâmetros de consulta de URL. Isso é útil quando você deseja construir uma string de consulta para anexar a uma URL.
+
+- `objectToUrlParams(obj)`: Converte um objeto em uma string de parâmetros de consulta de URL.
+
+```typescript
+import { objectToUrlParams } from 'ivip-utils';
+
+// Suponha que tenhamos o seguinte objeto
+const obj = {
+  nome: 'John',
+  idade: 30,
+  interesses: ['programação', 'viagens'],
+};
+
+const queryString = objectToUrlParams(obj);
+
+console.log(queryString);
+```
+
+No exemplo acima, a função `objectToUrlParams` recebe o objeto `obj` e o converte em uma string de parâmetros de consulta de URL. O resultado será:
+
+```
+nome=John&idade=30&interesses[]=programa%C3%A7%C3%A3o&interesses[]=viagens
+```
+
+Esta string pode ser anexada a uma URL como parte da string de consulta, como em:
+
+```
+https://exemplo.com/?nome=John&idade=30&interesses[]=programa%C3%A7%C3%A3o&interesses[]=viagens
+```
+
+Isso é útil ao construir URLs dinamicamente em aplicativos da web ou ao enviar dados em uma solicitação HTTP.
 
 ## Funções de Validação
 

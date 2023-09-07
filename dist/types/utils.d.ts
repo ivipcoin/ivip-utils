@@ -27,5 +27,8 @@ export declare function bytesToNumber(bytes: TypedArrayLike | TypedArray | numbe
 export declare function getAllUrlParams(url?: string): {
     [key: string]: any;
 };
+export declare function objectToUrlParams(obj: {
+    [key: string]: any;
+}): string;
 export {};
 //# sourceMappingURL=utils.d.ts.map

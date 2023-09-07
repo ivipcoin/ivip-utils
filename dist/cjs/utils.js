@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUrlParams = exports.bytesToNumber = exports.numberToBytes = exports.decodeString = exports.encodeString = exports.defer = exports.getGlobalObject = exports.deepEqual = exports.safeGet = exports.contains = exports.uuidv4 = exports.asyncForEach = void 0;
+exports.objectToUrlParams = exports.getAllUrlParams = exports.bytesToNumber = exports.numberToBytes = exports.decodeString = exports.encodeString = exports.defer = exports.getGlobalObject = exports.deepEqual = exports.safeGet = exports.contains = exports.uuidv4 = exports.asyncForEach = void 0;
 const validation_1 = require("./validation");
 const asyncForEach = (array, callback) => {
     return new Promise(async (resolve, reject) => {
@@ -299,4 +299,16 @@ function getAllUrlParams(url) {
     return obj;
 }
 exports.getAllUrlParams = getAllUrlParams;
+function objectToUrlParams(obj) {
+    return Object.keys(obj)
+        .map((key) => {
+        const value = obj[key];
+        if (Array.isArray(value)) {
+            return value.map((val) => `${encodeURIComponent(key)}[]=${encodeURIComponent(val)}`).join("&");
+        }
+        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    })
+        .join("&");
+}
+exports.objectToUrlParams = objectToUrlParams;
 //# sourceMappingURL=utils.js.map
