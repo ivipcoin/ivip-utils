@@ -271,7 +271,7 @@ export function getAllUrlParams(url?: string): { [key: string]: any } {
 
 			paramName = paramName.toLowerCase();
 			if (typeof paramValue === "string") {
-				paramValue = paramValue.toLowerCase();
+				paramValue = decodeURIComponent(paramValue).toLowerCase();
 			}
 
 			if (/\[(\d+)?\]$/.test(paramName)) {
