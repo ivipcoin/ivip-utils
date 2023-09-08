@@ -268,7 +268,7 @@ function getAllUrlParams(url) {
             let paramValue = typeof a[1] === "undefined" ? true : a[1];
             paramName = paramName.toLowerCase();
             if (typeof paramValue === "string") {
-                paramValue = paramValue.toLowerCase();
+                paramValue = decodeURIComponent(paramValue).toLowerCase();
             }
             if (/\[(\d+)?\]$/.test(paramName)) {
                 let key = paramName.replace(/\[(\d+)?\]/, "");
