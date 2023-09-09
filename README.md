@@ -126,6 +126,15 @@ Você pode importar as funções de utilitário individualmente em seu código, 
 import { asyncForEach, uuidv4 } from 'ivip-utils';
 ```
 
+OU, se quiser usar o cliente no navegador, use o seguinte código:
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ivip-utils@latest/dist/browser.min.js"></script>
+<script type="text/javascript">
+    const { asyncForEach, uuidv4 } = ivipUtils;
+</script>
+```
+
 ### Documentação
 
 Aqui estão detalhes sobre as funções de utilitário disponíveis no módulo `ivip-utils`:

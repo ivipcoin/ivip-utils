@@ -447,7 +447,7 @@ export const infoColor = (color: string): InfoColor => {
 		b[2] = b[2]
 			.replace(/^\s+|\s+$/g, "")
 			.split(/\s*,\s*/)
-			.map((x, i) => {
+			.map((x: any, i: any) => {
 				if (/%$/.test(x) && i === e) {
 					return parseFloat(x) / 100;
 				} else if (/%$/.test(x)) {
@@ -465,7 +465,7 @@ export const infoColor = (color: string): InfoColor => {
 	} else if (Object.keys(colorNames).includes(String(color).toLowerCase())) {
 		result.type = "name";
 		result.string = color;
-		result.array = hexToRgb(colorNames[color]);
+		result.array = hexToRgb((colorNames as any)[color]);
 	}
 	return result;
 };
@@ -629,7 +629,7 @@ export default class Color {
 	}
 
 	static colorName(color: string): PropsColor {
-		const hex = colorNames[color];
+		const hex = (colorNames as any)[color];
 		let result: PropsColor = Color.hex(hex);
 		result.string = String(color).toLowerCase();
 		return result;

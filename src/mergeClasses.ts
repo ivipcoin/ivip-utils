@@ -14,11 +14,11 @@ const wrapProto = (i: object): object => {
 	const names = findProtoNames(i);
 	const o: { [key: string]: (...args: any[]) => any } = {};
 	for (const name of names) {
-		if (typeof i[name] !== "function") {
+		if (typeof (i as any)[name] !== "function") {
 			continue;
 		}
 		o[name] = function (this: any, ...args: any[]) {
-			return i[name].apply(i, args);
+			return (i as any)[name].apply(i, args);
 		};
 	}
 	return o;
@@ -32,10 +32,10 @@ const assignProperties = (a: object, b: object): object => {
 
 		Object.defineProperty(a, propName, {
 			get: function () {
-				return b[propName];
+				return (b as any)[propName];
 			},
 			set: function (value) {
-				b[propName] = value;
+				(b as any)[propName] = value;
 			},
 		});
 	}

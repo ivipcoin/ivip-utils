@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function c(input, length, result) {
     const b = [0, 0, 0, 0, 0];
     for (let i = 0; i < length; i += 4) {
@@ -74,5 +72,5 @@ const ascii85 = {
         return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
     },
 };
-exports.default = ascii85;
+export default ascii85;
 //# sourceMappingURL=Ascii85.js.map

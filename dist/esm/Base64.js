@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Base64 {
+export default class Base64 {
     constructor(value) {
         this.value = value;
         this.keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -104,5 +102,4 @@ class Base64 {
         return new Base64(value).decode();
     }
 }
-exports.default = Base64;
 //# sourceMappingURL=Base64.js.map

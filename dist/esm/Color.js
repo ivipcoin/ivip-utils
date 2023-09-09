@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.infoColor = exports.hslDistance = exports.negative = exports.growing = exports.watershed = exports.colorScale = exports.grayScale = exports.lighten = exports.darken = exports.blend = exports.hwbToRgb = exports.cmykToRgb = exports.hsvToRgb = exports.hslToRgb = exports.rgbToHwb = exports.rgbToCmyk = exports.rgbToHsv = exports.rgbToHsl = exports.rgbToHex = exports.hexToRgb = exports.colorNames = void 0;
-exports.colorNames = {
+export const colorNames = {
     aliceblue: "#f0f8ff",
     antiquewhite: "#faebd7",
     aqua: "#00ffff",
@@ -153,19 +150,17 @@ exports.colorNames = {
 const prependZeroIfNecessaryHelper = (a) => {
     return 1 == a.length ? "0" + a : a;
 };
-const hexToRgb = (a) => {
+export const hexToRgb = (a) => {
     let b = parseInt(a.substring(1, 3), 16), c = parseInt(a.substring(3, 5), 16), d = parseInt(a.substring(5, 7), 16);
     return [b, c, d];
 };
-exports.hexToRgb = hexToRgb;
-const rgbToHex = (a, b, c) => {
+export const rgbToHex = (a, b, c) => {
     if (isNaN(a) || 0 > a || 255 < a || isNaN(b) || 0 > b || 255 < b || isNaN(c) || 0 > c || 255 < c) {
         return "#000000";
     }
     return "#" + [prependZeroIfNecessaryHelper(a.toString(16)), prependZeroIfNecessaryHelper(b.toString(16)), prependZeroIfNecessaryHelper(c.toString(16))].join("");
 };
-exports.rgbToHex = rgbToHex;
-const rgbToHsl = (a, b, c) => {
+export const rgbToHsl = (a, b, c) => {
     a /= 255;
     b /= 255;
     c /= 255;
@@ -184,8 +179,7 @@ const rgbToHsl = (a, b, c) => {
     g = 0 < h && 0.5 >= h ? (d - e) / (2 * h) : (d - e) / (2 - 2 * h);
     return [Math.round(f + 360) % 360, Math.round(g * 100), Math.round(h * 100)];
 };
-exports.rgbToHsl = rgbToHsl;
-const rgbToHsv = (a, b, c) => {
+export const rgbToHsv = (a, b, c) => {
     let d = Math.max(Math.max(a, b), c), e = Math.min(Math.min(a, b), c), f;
     if (e == d) {
         e = a = 0;
@@ -203,8 +197,7 @@ const rgbToHsv = (a, b, c) => {
     }
     return [Math.round(a), Math.round(e * 100), Math.round((d * 100) / 255)];
 };
-exports.rgbToHsv = rgbToHsv;
-const rgbToCmyk = (a, b, c) => {
+export const rgbToCmyk = (a, b, c) => {
     let d, e, f, g, h, i, j;
     if (a == 0 && b == 0 && c == 0) {
         d = e = f = 0;
@@ -221,10 +214,9 @@ const rgbToCmyk = (a, b, c) => {
     }
     return [Math.round(d * 100), Math.round(e * 100), Math.round(f * 100), Math.round(g * 100)];
 };
-exports.rgbToCmyk = rgbToCmyk;
-const rgbToHwb = (a, b, c) => {
+export const rgbToHwb = (a, b, c) => {
     let d, e, f, g, h, i, j;
-    h = (0, exports.rgbToHsv)(a, b, c)[0];
+    h = rgbToHsv(a, b, c)[0];
     a /= 255;
     b /= 255;
     c /= 255;
@@ -250,12 +242,11 @@ const rgbToHwb = (a, b, c) => {
     }
     return [Math.round(h), Math.round(i), Math.round(j)];
 };
-exports.rgbToHwb = rgbToHwb;
 const hueToRgb_ = (a, b, c) => {
     0 > c ? (c += 1) : 1 < c && (c -= 1);
     return 1 > 6 * c ? a + 6 * (b - a) * c : 1 > 2 * c ? b : 2 > 3 * c ? a + (b - a) * (2 / 3 - c) * 6 : a;
 };
-const hslToRgb = (a, b, c) => {
+export const hslToRgb = (a, b, c) => {
     let d = 0, e = 0, f = 0, g;
     a /= 360;
     if (0 == b) {
@@ -271,8 +262,7 @@ const hslToRgb = (a, b, c) => {
     }
     return [Math.round(d), Math.round(e), Math.round(f)];
 };
-exports.hslToRgb = hslToRgb;
-const hsvToRgb = (a, b_, c) => {
+export const hsvToRgb = (a, b_, c) => {
     let r, g, b, d, e, f, h, i, k, l, m;
     if (b_ == 0) {
         r = g = b = Math.round(c * 255);
@@ -319,13 +309,11 @@ const hsvToRgb = (a, b_, c) => {
     }
     return [r, g, b];
 };
-exports.hsvToRgb = hsvToRgb;
-const cmykToRgb = (a, b, c, d) => {
+export const cmykToRgb = (a, b, c, d) => {
     let e = 255 * (1 - a) * (1 - d), f = 255 * (1 - b) * (1 - d), g = 255 * (1 - c) * (1 - d);
     return [Math.round(e), Math.round(f), Math.round(g)];
 };
-exports.cmykToRgb = cmykToRgb;
-const hwbToRgb = (a, b, c) => {
+export const hwbToRgb = (a, b, c) => {
     let d, e, f, g, h, i, j;
     a = a * 6;
     g = 1 - c;
@@ -373,35 +361,29 @@ const hwbToRgb = (a, b, c) => {
     }
     return [Math.round(d), Math.round(e), Math.round(f)];
 };
-exports.hwbToRgb = hwbToRgb;
-const blend = (a, b, c) => {
+export const blend = (a, b, c) => {
     c = Math.min(Math.max(c, 0), 1);
     return [Math.round(c * a[0] + (1 - c) * b[0]), Math.round(c * a[1] + (1 - c) * b[1]), Math.round(c * a[2] + (1 - c) * b[2])];
 };
-exports.blend = blend;
-const darken = (a, b) => {
-    return (0, exports.blend)([0, 0, 0], a, b);
+export const darken = (a, b) => {
+    return blend([0, 0, 0], a, b);
 };
-exports.darken = darken;
-const lighten = (a, b) => {
-    return (0, exports.blend)([255, 255, 255], a, b);
+export const lighten = (a, b) => {
+    return blend([255, 255, 255], a, b);
 };
-exports.lighten = lighten;
-const grayScale = (a) => {
+export const grayScale = (a) => {
     let b = Math.round((a[0] + a[1] + a[2]) / 3);
     return [b, b, b];
 };
-exports.grayScale = grayScale;
-const colorScale = (a, b, c) => {
-    let s = (0, exports.grayScale)(a)[0];
+export const colorScale = (a, b, c) => {
+    let s = grayScale(a)[0];
     b = b == undefined ? [255, 255, 255] : b;
     c = c == undefined ? [0, 0, 0] : c;
     let d = (s * 100) / 255;
-    return (0, exports.blend)(b, c, d);
+    return blend(b, c, d);
 };
-exports.colorScale = colorScale;
-const watershed = (a) => {
-    let b = (0, exports.grayScale)(a), c = b[0], e = 255 / 2;
+export const watershed = (a) => {
+    let b = grayScale(a), c = b[0], e = 255 / 2;
     if (c >= e) {
         return [255, 255, 255];
     }
@@ -409,17 +391,14 @@ const watershed = (a) => {
         return [0, 0, 0];
     }
 };
-exports.watershed = watershed;
-const growing = (a) => {
-    let b = (0, exports.grayScale)(a), c = b[0];
-    return (0, exports.hslToRgb)(Math.round((c * 360) / 255), 100 / 100, 50 / 100);
+export const growing = (a) => {
+    let b = grayScale(a), c = b[0];
+    return hslToRgb(Math.round((c * 360) / 255), 100 / 100, 50 / 100);
 };
-exports.growing = growing;
-const negative = (a) => {
+export const negative = (a) => {
     return [Math.round(255 - a[0]), Math.round(255 - a[1]), Math.round(255 - a[2])];
 };
-exports.negative = negative;
-const hslDistance = (a, b) => {
+export const hslDistance = (a, b) => {
     a = [a[0], a[1] / 100, a[2] / 100];
     b = [b[0], b[1] / 100, b[2] / 100];
     let c, d;
@@ -427,8 +406,7 @@ const hslDistance = (a, b) => {
     d = 0.5 >= b[2] ? b[1] * b[2] : b[1] * (1 - b[2]);
     return Math.round(((a[2] - b[2]) * (a[2] - b[2]) + c * c + d * d - 2 * c * d * Math.cos(2 * (a[0] / 360 - b[0] / 360) * Math.PI)) * 100);
 };
-exports.hslDistance = hslDistance;
-const infoColor = (color) => {
+export const infoColor = (color) => {
     let result = { type: undefined, string: undefined, array: undefined }, b, c, d, e;
     if ((b = /^((?:rgb|hs[lv]|cmyk|hwb)a?)\s*\(([^\)]*)\)/.exec(String(color)))) {
         c = b[1];
@@ -453,21 +431,20 @@ const infoColor = (color) => {
     else if (/^#[A-Fa-f0-9]+$/.test(color)) {
         result.type = "hex";
         result.string = color;
-        result.array = (0, exports.hexToRgb)(color);
+        result.array = hexToRgb(color);
     }
-    else if (Object.keys(exports.colorNames).includes(String(color).toLowerCase())) {
+    else if (Object.keys(colorNames).includes(String(color).toLowerCase())) {
         result.type = "name";
         result.string = color;
-        result.array = (0, exports.hexToRgb)(exports.colorNames[color]);
+        result.array = hexToRgb(colorNames[color]);
     }
     return result;
 };
-exports.infoColor = infoColor;
-class Color {
+export default class Color {
     constructor(color = "#000000") {
         this.value = "#000000";
-        this.value = Array.isArray(color) ? exports.rgbToHex.apply(null, color) : color;
-        this.info = (0, exports.infoColor)(this.value);
+        this.value = Array.isArray(color) ? rgbToHex.apply(null, color) : color;
+        this.info = infoColor(this.value);
         this.type = this.info.type;
         const defaultProps = {
             rgb: [0, 0, 0],
@@ -534,49 +511,49 @@ class Color {
         return this.props.string;
     }
     get vector() {
-        return (0, exports.infoColor)(this.rgb).array;
+        return infoColor(this.rgb).array;
     }
     distance(a) {
-        return (0, exports.hslDistance)(this.props.hsl, new Color(a).props.hsl);
+        return hslDistance(this.props.hsl, new Color(a).props.hsl);
     }
     blend(a, b) {
-        const c = (0, exports.blend)(this.props.rgb, new Color(a).props.rgb, b);
+        const c = blend(this.props.rgb, new Color(a).props.rgb, b);
         return new Color("rgb(" + c.join(", ") + ")");
     }
     static blend(a, b, c) {
         return new Color(a).blend(b, c);
     }
     darken(a) {
-        let b = (0, exports.darken)(this.props.rgb, a);
+        let b = darken(this.props.rgb, a);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     lighten(a) {
-        let b = (0, exports.lighten)(this.props.rgb, a);
+        let b = lighten(this.props.rgb, a);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     grayScale() {
-        let b = (0, exports.grayScale)(this.props.rgb);
+        let b = grayScale(this.props.rgb);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     colorScale(a, b) {
-        const c = (0, exports.colorScale)(this.props.rgb, new Color(a == undefined ? "#ffffff" : a).props.rgb, new Color(b == undefined ? "#000000" : b).props.rgb);
+        const c = colorScale(this.props.rgb, new Color(a == undefined ? "#ffffff" : a).props.rgb, new Color(b == undefined ? "#000000" : b).props.rgb);
         return new Color("rgb(" + c.join(", ") + ")");
     }
     watershed() {
-        let b = (0, exports.watershed)(this.props.rgb);
+        let b = watershed(this.props.rgb);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     growing() {
-        let b = (0, exports.growing)(this.props.rgb);
+        let b = growing(this.props.rgb);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     negative() {
-        let b = (0, exports.negative)(this.props.rgb);
+        let b = negative(this.props.rgb);
         return new Color("rgb(" + b.join(", ") + ")");
     }
     static isColor(color) {
         try {
-            let b = (0, exports.infoColor)(color);
+            let b = infoColor(color);
             if (["hex", "name", "rgb", "hsl", "hsv", "cmyk", "hwb", "rgba", "hsla", "hsva", "cmyka", "hwba"].includes(b.type ?? "")) {
                 return true;
             }
@@ -587,7 +564,7 @@ class Color {
         return false;
     }
     static colorName(color) {
-        const hex = exports.colorNames[color];
+        const hex = colorNames[color];
         let result = Color.hex(hex);
         result.string = String(color).toLowerCase();
         return result;
@@ -604,7 +581,7 @@ class Color {
             return a.toLowerCase();
         };
         hex = normalizeHex(hex);
-        let result = Color.rgb.apply(null, (0, exports.hexToRgb)(hex));
+        let result = Color.rgb.apply(null, hexToRgb(hex));
         result.string = hex;
         result.hex = hex;
         return result;
@@ -617,18 +594,18 @@ class Color {
         return {
             rgb,
             string: "rgb(" + rgb.join(", ") + ")",
-            hex: (0, exports.rgbToHex)(a, b, c),
-            hsl: (0, exports.rgbToHsl)(a, b, c),
-            hsv: (0, exports.rgbToHsv)(a, b, c),
-            cmyk: (0, exports.rgbToCmyk)(a, b, c),
-            hwb: (0, exports.rgbToHwb)(a, b, c),
+            hex: rgbToHex(a, b, c),
+            hsl: rgbToHsl(a, b, c),
+            hsv: rgbToHsv(a, b, c),
+            cmyk: rgbToCmyk(a, b, c),
+            hwb: rgbToHwb(a, b, c),
         };
     }
     static hsl(a, b, c) {
         a = Math.round(Number(a));
         b = Number(b) / 100;
         c = Number(c) / 100;
-        const rgb = (0, exports.hslToRgb)(a, b, c);
+        const rgb = hslToRgb(a, b, c);
         let result = Color.rgb.apply(null, rgb);
         result.hsl = [Math.round(a), Math.round(b * 100), Math.round(c * 100)];
         result.string = "hsl(" + result.hsl.map((v, i) => v + (i > 0 ? "%" : "")).join(", ") + ")";
@@ -638,7 +615,7 @@ class Color {
         a = Math.round(Number(a));
         b = Number(b) / 100;
         c = Number(c) / 100;
-        const rgb = (0, exports.hsvToRgb)(a, b, c);
+        const rgb = hsvToRgb(a, b, c);
         let result = Color.rgb.apply(null, rgb);
         result.hsv = [Math.round(a), Math.round(b * 100), Math.round(c * 100)];
         result.string = "hsv(" + result.hsv.map((v, i) => v + (i > 0 ? "%" : "")).join(", ") + ")";
@@ -649,7 +626,7 @@ class Color {
         b = Number(b) / 100;
         c = Number(c) / 100;
         d = Number(d) / 100;
-        const rgb = (0, exports.cmykToRgb)(a, b, c, d);
+        const rgb = cmykToRgb(a, b, c, d);
         let result = Color.rgb.apply(null, rgb);
         result.cmyk = [Math.round(a * 100), Math.round(b * 100), Math.round(c * 100), Math.round(d * 100)];
         result.string = "cmyk(" + result.cmyk.join("%, ") + "%)";
@@ -659,12 +636,11 @@ class Color {
         a = Number(a) / 360;
         b = Number(b) / 100;
         c = Number(c) / 100;
-        const rgb = (0, exports.hwbToRgb)(a, b, c);
+        const rgb = hwbToRgb(a, b, c);
         let result = Color.rgb.apply(null, rgb);
         result.hwb = [Math.round(a * 360), Math.round(b * 100), Math.round(c * 100)];
         result.string = "hwb(" + result.hwb.map((v, i) => v + (i > 0 ? "%" : "")).join(", ") + ")";
         return result;
     }
 }
-exports.default = Color;
 //# sourceMappingURL=Color.js.map

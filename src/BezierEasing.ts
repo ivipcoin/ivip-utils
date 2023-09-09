@@ -615,8 +615,10 @@ export default class BezierEasing {
 				await func(easing.to(t));
 			} else if (typeof easing === "function") {
 				await func(easing(t) ?? 1);
+			} else if (easing in easingList) {
+				await func((BezierEasing as any)[easingList[easing]](t));
 			} else {
-				await func(BezierEasing[easing](t));
+				await func(t);
 			}
 
 			elapsed = Date.now() - start;

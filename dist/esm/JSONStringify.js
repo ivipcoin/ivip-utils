@@ -1,18 +1,16 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const validation_1 = require("./validation.js");
+import { isArray, isObject, isString, isBoolean, isNumber, isNull, isNotNumber, isInfinity, isDate, isUndefined, isFunction, isSymbol } from "./validation.js";
 const JSONStringify = (obj) => {
     const restOfDataTypes = (value) => {
-        return (0, validation_1.isNumber)(value) || (0, validation_1.isString)(value) || (0, validation_1.isBoolean)(value);
+        return isNumber(value) || isString(value) || isBoolean(value);
     };
     const ignoreDataTypes = (value) => {
-        return (0, validation_1.isUndefined)(value) || (0, validation_1.isFunction)(value) || (0, validation_1.isSymbol)(value);
+        return isUndefined(value) || isFunction(value) || isSymbol(value);
     };
     const nullDataTypes = (value) => {
-        return (0, validation_1.isNotNumber)(value) || (0, validation_1.isInfinity)(value) || (0, validation_1.isNull)(value);
+        return isNotNumber(value) || isInfinity(value) || isNull(value);
     };
     const arrayValuesNullTypes = (value) => {
-        return (0, validation_1.isNotNumber)(value) || (0, validation_1.isInfinity)(value) || (0, validation_1.isNull)(value) || ignoreDataTypes(value);
+        return isNotNumber(value) || isInfinity(value) || isNull(value) || ignoreDataTypes(value);
     };
     const removeComma = (str) => {
         const tempArr = str.split("");
@@ -22,19 +20,19 @@ const JSONStringify = (obj) => {
     if (ignoreDataTypes(obj)) {
         return "{}";
     }
-    if ((0, validation_1.isDate)(obj)) {
+    if (isDate(obj)) {
         return `"${obj.toISOString()}"`;
     }
     if (nullDataTypes(obj)) {
         return `${null}`;
     }
-    if ((0, validation_1.isSymbol)(obj)) {
+    if (isSymbol(obj)) {
         return "{}";
     }
     if (restOfDataTypes(obj)) {
         return JSON.stringify(obj);
     }
-    if ((0, validation_1.isArray)(obj)) {
+    if (isArray(obj)) {
         let arrStr = "";
         obj.forEach((eachValue) => {
             arrStr += arrayValuesNullTypes(eachValue) ? JSONStringify(null) : JSONStringify(eachValue);
@@ -42,7 +40,7 @@ const JSONStringify = (obj) => {
         });
         return `[` + removeComma(arrStr) + `]`;
     }
-    if ((0, validation_1.isObject)(obj)) {
+    if (isObject(obj)) {
         let objStr = "";
         const objKeys = Object.keys(obj);
         objKeys.forEach((eachKey) => {
@@ -53,5 +51,5 @@ const JSONStringify = (obj) => {
     }
     return "{}";
 };
-exports.default = JSONStringify;
+export default JSONStringify;
 //# sourceMappingURL=JSONStringify.js.map

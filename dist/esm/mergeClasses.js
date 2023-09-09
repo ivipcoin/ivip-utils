@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const findProtoNames = (i) => {
     let names = [];
     let c = i.constructor;
@@ -49,5 +47,5 @@ const mergeClasses = (a, b) => {
         return assignProperties(a, wrapper);
     }
 };
-exports.default = mergeClasses;
+export default mergeClasses;
 //# sourceMappingURL=mergeClasses.js.map

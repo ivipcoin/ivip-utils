@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const A = (a, b) => {
     return 1.0 - 3.0 * b + 3.0 * a;
 };
@@ -128,7 +126,7 @@ const easingList = {
 /**
  * Classe que implementa as funções de easing de Bezier
  */
-class BezierEasing {
+export default class BezierEasing {
     /**
      * Cria uma nova instância de BezierEasing com os parâmetros de controle da curva de Bezier.
      *
@@ -549,8 +547,11 @@ class BezierEasing {
             else if (typeof easing === "function") {
                 await func(easing(t) ?? 1);
             }
+            else if (easing in easingList) {
+                await func(BezierEasing[easingList[easing]](t));
+            }
             else {
-                await func(BezierEasing[easing](t));
+                await func(t);
             }
             elapsed = Date.now() - start;
             timerDelay = setTimeout(loop, delay - (elapsed % delay));
@@ -559,5 +560,4 @@ class BezierEasing {
         return timerDelay;
     }
 }
-exports.default = BezierEasing;
 //# sourceMappingURL=BezierEasing.js.map

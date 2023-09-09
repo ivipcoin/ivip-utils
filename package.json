@@ -1,6 +1,6 @@
 {
 	"name": "ivip-utils",
-	"version": "1.0.7",
+	"version": "1.1.0",
 	"description": "O ivip-utils é um módulo abrangente que oferece ferramentas e funções para simplificar o desenvolvimento na plataforma IVIP. Ele ajuda os desenvolvedores a lidar com tarefas comuns, como manipulação de dados, interações com API e gerenciamento de erros, melhorando a eficiência e a qualidade dos projetos IVIP.",
 	"comments": {
 		"browser": "Consulte README.md para obter mais informações sobre ivip-utils para webpack/browserify",
@@ -16,11 +16,12 @@
 	"repository": "github:ivipcoin/ivip-utils",
 	"scripts": {
 		"dev": "nodemon ./test",
-		"build": "npm run build:clean && npm run build:esm && npm run build:cjs && npm run build:packages && echo Done!",
+		"build": "npm run build:clean && npm run build:esm && npm run build:cjs && npm run build:packages && npm run browserify && echo Done!",
 		"build:clean": "rimraf dist",
-		"build:esm": "tsc -p tsconfig.json && npx tsc-esm-fix ---target='dist/esm'",
+		"build:esm": "tsc -p tsconfig-esm.json && npx tsc-esm-fix ---target='dist/esm'",
 		"build:cjs": "tsc -p tsconfig-cjs.json",
 		"build:packages": "bash ./create-package-files",
+		"browserify": "webpack --config webpack.config.js && terser dist/browser.js -o dist/browser.min.js",
 		"npm:publish": "npm run build && npm pack && npm publish --access public && echo published!"
 	},
 	"keywords": [
@@ -67,7 +68,6 @@
 		"url": "https://github.com/ivipcoin/ivip-utils/issues"
 	},
 	"homepage": "https://github.com/ivipcoin/ivip-utils#readme",
-	"dependencies": {},
 	"devDependencies": {
 		"@types/node": "^18.17.11",
 		"@typescript-eslint/eslint-plugin": "^6.2.1",
@@ -77,10 +77,13 @@
 		"esm": "^3.2.25",
 		"nodemon": "^3.0.1",
 		"rimraf": "^5.0.1",
+		"terser": "^5.19.4",
 		"ts-node": "^10.9.1",
 		"tsc-esm-fix": "^2.20.14",
 		"tsconfig-paths": "^4.1.2",
-		"typescript": "^5.0.2"
+		"typescript": "^5.0.2",
+		"webpack": "^5.61.0",
+		"webpack-cli": "^5.1.4"
 	},
 	"nodemonConfig": {
 		"restartable": "rs",

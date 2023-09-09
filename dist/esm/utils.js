@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.objectToUrlParams = exports.getAllUrlParams = exports.bytesToNumber = exports.numberToBytes = exports.decodeString = exports.encodeString = exports.defer = exports.getGlobalObject = exports.deepEqual = exports.safeGet = exports.contains = exports.uuidv4 = exports.asyncForEach = void 0;
-const validation_1 = require("./validation.js");
-const asyncForEach = (array, callback) => {
+import { isObject } from "./validation.js";
+export const asyncForEach = (array, callback) => {
     return new Promise(async (resolve, reject) => {
         try {
             for (let i = 0; i < array.length; i++) {
@@ -15,19 +12,16 @@ const asyncForEach = (array, callback) => {
         }
     });
 };
-exports.asyncForEach = asyncForEach;
-function uuidv4() {
+export function uuidv4() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
         const r = (Math.random() * 16) | 0, v = c === "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
     });
 }
-exports.uuidv4 = uuidv4;
-function contains(obj, key) {
+export function contains(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-exports.contains = contains;
-function safeGet(obj, key) {
+export function safeGet(obj, key) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
         return obj[key];
     }
@@ -35,11 +29,10 @@ function safeGet(obj, key) {
         return undefined;
     }
 }
-exports.safeGet = safeGet;
 /**
  * Deep equal two objects. Support Arrays and Objects.
  */
-function deepEqual(a, b) {
+export function deepEqual(a, b) {
     if (a === b) {
         return true;
     }
@@ -51,7 +44,7 @@ function deepEqual(a, b) {
         }
         const aProp = a[k];
         const bProp = b[k];
-        if ((0, validation_1.isObject)(aProp) && (0, validation_1.isObject)(bProp)) {
+        if (isObject(aProp) && isObject(bProp)) {
             if (!deepEqual(aProp, bProp)) {
                 return false;
             }
@@ -67,8 +60,7 @@ function deepEqual(a, b) {
     }
     return true;
 }
-exports.deepEqual = deepEqual;
-function getGlobalObject() {
+export function getGlobalObject() {
     if (typeof globalThis !== "undefined") {
         return globalThis;
     }
@@ -83,15 +75,13 @@ function getGlobalObject() {
     }
     throw new Error("Unable to locate global object.");
 }
-exports.getGlobalObject = getGlobalObject;
-function defer(fn) {
+export function defer(fn) {
     process.nextTick(fn);
 }
-exports.defer = defer;
 /**
  * Converts a string to a utf-8 encoded Uint8Array
  */
-function encodeString(str) {
+export function encodeString(str) {
     if (typeof TextEncoder !== "undefined") {
         // Modern browsers, Node.js v11.0.0+ (or v8.3.0+ with util.TextEncoder)
         const encoder = new TextEncoder();
@@ -154,11 +144,10 @@ function encodeString(str) {
         return new Uint8Array(arr);
     }
 }
-exports.encodeString = encodeString;
 /**
  * Converts a utf-8 encoded buffer to string
  */
-function decodeString(buffer) {
+export function decodeString(buffer) {
     // ArrayBuffer|
     if (typeof TextDecoder !== "undefined") {
         // Modern browsers, Node.js v11.0.0+ (or v8.3.0+ with util.TextDecoder)
@@ -237,15 +226,13 @@ function decodeString(buffer) {
         }
     }
 }
-exports.decodeString = decodeString;
-function numberToBytes(number) {
+export function numberToBytes(number) {
     const bytes = new Uint8Array(8);
     const view = new DataView(bytes.buffer);
     view.setFloat64(0, number);
     return new Array(...bytes);
 }
-exports.numberToBytes = numberToBytes;
-function bytesToNumber(bytes) {
+export function bytesToNumber(bytes) {
     const length = Array.isArray(bytes) ? bytes.length : bytes.byteLength;
     if (length !== 8) {
         throw new TypeError("must be 8 bytes");
@@ -255,8 +242,7 @@ function bytesToNumber(bytes) {
     const nr = view.getFloat64(0);
     return nr;
 }
-exports.bytesToNumber = bytesToNumber;
-function getAllUrlParams(url) {
+export function getAllUrlParams(url) {
     let queryString = url ? url.split("?")[1] : window.location.search.slice(1);
     let obj = {};
     if (queryString) {
@@ -298,8 +284,7 @@ function getAllUrlParams(url) {
     }
     return obj;
 }
-exports.getAllUrlParams = getAllUrlParams;
-function objectToUrlParams(obj) {
+export function objectToUrlParams(obj) {
     return Object.keys(obj)
         .map((key) => {
         const value = obj[key];
@@ -310,5 +295,4 @@ function objectToUrlParams(obj) {
     })
         .join("&");
 }
-exports.objectToUrlParams = objectToUrlParams;
 //# sourceMappingURL=utils.js.map

@@ -550,8 +550,11 @@ class BezierEasing {
             else if (typeof easing === "function") {
                 await func((_a = easing(t)) !== null && _a !== void 0 ? _a : 1);
             }
+            else if (easing in easingList) {
+                await func(BezierEasing[easingList[easing]](t));
+            }
             else {
-                await func(BezierEasing[easing](t));
+                await func(t);
             }
             elapsed = Date.now() - start;
             timerDelay = setTimeout(loop, delay - (elapsed % delay));
