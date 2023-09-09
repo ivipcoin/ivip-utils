@@ -130,6 +130,11 @@ OU, se quiser usar o cliente no navegador, use o seguinte código:
 
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ivip-utils@latest/dist/browser.min.js"></script>
+```
+
+Exemplo de uso:
+
+```html
 <script type="text/javascript">
     const { asyncForEach, uuidv4 } = ivipUtils;
 </script>
