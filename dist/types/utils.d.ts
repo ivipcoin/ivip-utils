@@ -1,3 +1,4 @@
+export * from "./mimeTypeFromBuffer";
 interface TypedArrayLike {
     byteLength: number;
     buffer: ArrayBuffer;
@@ -30,5 +31,4 @@ export declare function getAllUrlParams(url?: string): {
 export declare function objectToUrlParams(obj: {
     [key: string]: any;
 }): string;
-export {};
 //# sourceMappingURL=utils.d.ts.map

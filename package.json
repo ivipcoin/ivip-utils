@@ -1,6 +1,6 @@
 {
 	"name": "ivip-utils",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "O ivip-utils é um módulo abrangente que oferece ferramentas e funções para simplificar o desenvolvimento na plataforma IVIP. Ele ajuda os desenvolvedores a lidar com tarefas comuns, como manipulação de dados, interações com API e gerenciamento de erros, melhorando a eficiência e a qualidade dos projetos IVIP.",
 	"comments": {
 		"browser": "Consulte README.md para obter mais informações sobre ivip-utils para webpack/browserify",

@@ -1,4 +1,5 @@
 import { isObject } from "./validation.js";
+export * from "./mimeTypeFromBuffer.js";
 export const asyncForEach = (array, callback) => {
     return new Promise(async (resolve, reject) => {
         try {

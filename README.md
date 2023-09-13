@@ -29,6 +29,10 @@ npm install ivip-utils
       - [`numberToBytes` e `bytesToNumber`](#numbertobytes-e-bytestonumber)
       - [`getAllUrlParams`](#getallurlparams)
       - [`objectToUrlParams`](#objecttourlparams)
+    - [`mimeTypeFromBuffer`](#mimetypefrombuffer)
+      - [Parâmetros](#parâmetros)
+      - [Retorna](#retorna)
+      - [Exemplo de Uso](#exemplo-de-uso)
   - [Funções de Validação](#funções-de-validação)
     - [Uso Básico](#uso-básico)
       - [Verificando se um valor é uma matriz:](#verificando-se-um-valor-é-uma-matriz)
@@ -39,7 +43,7 @@ npm install ivip-utils
     - [Funções Disponíveis](#funções-disponíveis)
       - [`encode`](#encode)
       - [`decode`](#decode)
-    - [Exemplo de Uso](#exemplo-de-uso)
+    - [Exemplo de Uso](#exemplo-de-uso-1)
   - [Módulo SimpleEventEmitter](#módulo-simpleeventemitter)
     - [Importação](#importação)
     - [Construtor](#construtor)
@@ -51,7 +55,7 @@ npm install ivip-utils
       - [`emitOnce(event: string, data?: any): this`](#emitonceevent-string-data-any-this)
       - [`pipe(event: string, eventEmitter: SimpleEventEmitter): SimpleEventEmitterProperty`](#pipeevent-string-eventemitter-simpleeventemitter-simpleeventemitterproperty)
       - [`pipeOnce(event: string, eventEmitter: SimpleEventEmitter): Promise<any>`](#pipeonceevent-string-eventemitter-simpleeventemitter-promiseany)
-    - [Exemplo de Uso](#exemplo-de-uso-1)
+    - [Exemplo de Uso](#exemplo-de-uso-2)
   - [Módulo BezierEasing](#módulo-beziereasing)
     - [Recursos Principais](#recursos-principais)
     - [Como Usar](#como-usar)
@@ -401,6 +405,40 @@ https://exemplo.com/?nome=John&idade=30&interesses[]=programa%C3%A7%C3%A3o&inter
 ```
 
 Isso é útil ao construir URLs dinamicamente em aplicativos da web ou ao enviar dados em uma solicitação HTTP.
+
+### `mimeTypeFromBuffer`
+
+A função `mimeTypeFromBuffer` permite detectar o tipo MIME com base nos primeiros bytes de um buffer. É útil quando você tem um buffer de dados e deseja determinar o tipo de arquivo associado a esses dados.
+
+#### Parâmetros
+
+- `buffer`: Um objeto do tipo `Buffer` que contém os dados dos quais você deseja determinar o tipo MIME.
+
+#### Retorna
+
+- Uma string representando o tipo MIME detectado com base nos primeiros bytes do buffer. Se o tipo MIME não puder ser determinado, a função retorna `null`.
+
+#### Exemplo de Uso
+
+```typescript
+import { mimeTypeFromBuffer } from 'ivip-utils';
+
+// Exemplo de leitura de um arquivo em um buffer (substitua 'nome-do-arquivo' pelo caminho do arquivo real)
+const fs = require('fs');
+const filePath = 'caminho/para/seu/arquivo.extensao';
+const buffer = fs.readFileSync(filePath);
+
+// Detectar o tipo MIME do buffer
+const mimeType = mimeTypeFromBuffer(buffer);
+
+if (mimeType) {
+  console.log(`O tipo MIME do arquivo é: ${mimeType}`);
+} else {
+  console.log('Tipo MIME desconhecido');
+}
+```
+
+Certifique-se de substituir `'caminho/para/seu/arquivo.extensao'` pelo caminho real do arquivo que você deseja verificar. Isso lerá o arquivo em um buffer, chamará a função `mimeTypeFromBuffer` para determinar o tipo MIME e exibirá o resultado no console.
 
 ## Funções de Validação
 

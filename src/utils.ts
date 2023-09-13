@@ -1,5 +1,7 @@
 import { isObject } from "./validation";
 
+export * from "./mimeTypeFromBuffer";
+
 interface TypedArrayLike {
 	byteLength: number;
 	buffer: ArrayBuffer;
