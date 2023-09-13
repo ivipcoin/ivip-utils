@@ -1,5 +1,6 @@
 export { default as JSONStringify } from "./JSONStringify.js";
 export { default as mergeClasses } from "./mergeClasses.js";
+export * from "./mimeTypeFromBuffer.js";
 export * from "./utils.js";
 export * from "./validation.js";
 import * as gl_1 from "./gl/index.js";

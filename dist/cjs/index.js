@@ -34,6 +34,7 @@ var JSONStringify_1 = require("./JSONStringify");
 Object.defineProperty(exports, "JSONStringify", { enumerable: true, get: function () { return __importDefault(JSONStringify_1).default; } });
 var mergeClasses_1 = require("./mergeClasses");
 Object.defineProperty(exports, "mergeClasses", { enumerable: true, get: function () { return __importDefault(mergeClasses_1).default; } });
+__exportStar(require("./mimeTypeFromBuffer"), exports);
 __exportStar(require("./utils"), exports);
 __exportStar(require("./validation"), exports);
 exports.gl = __importStar(require("./gl"));

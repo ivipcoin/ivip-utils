@@ -1,4 +1,4 @@
-import { JSONStringify } from "../src";
+import { JSONStringify, mimeTypeFromBuffer } from "../src";
 
 const obj = {
 	name: "John",

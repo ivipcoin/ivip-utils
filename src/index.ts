@@ -2,6 +2,8 @@ export { default as JSONStringify } from "./JSONStringify";
 
 export { default as mergeClasses } from "./mergeClasses";
 
+export * from "./mimeTypeFromBuffer";
+
 export * from "./utils";
 
 export * from "./validation";
