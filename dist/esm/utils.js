@@ -243,7 +243,7 @@ export function bytesToNumber(bytes) {
     return nr;
 }
 export function getAllUrlParams(url) {
-    let queryString = url ? url.split("?")[1] : window && window.location && window.location.search ? window.location.search.slice(1) : "";
+    let queryString = url ? url.split("?")[1] : typeof window !== "undefined" && window.location && window.location.search ? window.location.search.slice(1) : "";
     let obj = {};
     if (queryString) {
         queryString = queryString.split("#")[0];

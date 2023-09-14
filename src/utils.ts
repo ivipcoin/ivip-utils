@@ -257,7 +257,7 @@ export function bytesToNumber(bytes: TypedArrayLike | TypedArray | number[]): nu
 }
 
 export function getAllUrlParams(url?: string): { [key: string]: any } {
-	let queryString = url ? url.split("?")[1] : window && window.location && window.location.search ? window.location.search.slice(1) : "";
+	let queryString = url ? url.split("?")[1] : typeof window !== "undefined" && window.location && window.location.search ? window.location.search.slice(1) : "";
 	let obj: any = {};
 
 	if (queryString) {
