@@ -23,7 +23,7 @@ const JSONStringify = (obj) => {
         return "{}";
     }
     if ((0, validation_1.isDate)(obj)) {
-        return `"${obj.toISOString()}"`;
+        return `"${new Date(obj).toISOString()}"`;
     }
     if (nullDataTypes(obj)) {
         return `${null}`;

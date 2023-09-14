@@ -28,7 +28,7 @@ const JSONStringify = (obj: any): string => {
 	}
 
 	if (isDate(obj)) {
-		return `"${obj.toISOString()}"`;
+		return `"${new Date(obj).toISOString()}"`;
 	}
 
 	if (nullDataTypes(obj)) {
