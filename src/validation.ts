@@ -1,11 +1,11 @@
-export const isArray = (value: any): boolean => {
+export const isArray = (value: any): value is Array<any> => {
 	return Array.isArray(value) && typeof value === "object";
 };
 
-export const isTypedArray = (val: any) =>
-	typeof val === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(val.constructor.name);
+export const isTypedArray = (value: any): value is ArrayBuffer | Buffer | Uint8Array | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array =>
+	typeof value === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(value.constructor.name);
 
-export const isObject = (value: any): boolean => {
+export const isObject = (value: any): value is Record<string, any> => {
 	return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
@@ -18,15 +18,15 @@ export const isJson = (value: any): boolean => {
 	}
 };
 
-export const isString = (value: any): boolean => {
+export const isString = (value: any): value is string => {
 	return typeof value === "string";
 };
 
-export const isBoolean = (value: any): boolean => {
+export const isBoolean = (value: any): value is boolean => {
 	return typeof value === "boolean";
 };
 
-export const isNumber = (value: any): boolean => {
+export const isNumber = (value: any): value is number => {
 	return typeof value === "number" && Number(value) === value;
 };
 
@@ -45,7 +45,7 @@ export const isFloat = (value: any) => {
 	return isNumber(value) && value % 1 !== 0;
 };
 
-export const isNull = (value: any): boolean => {
+export const isNull = (value: any): value is null => {
 	return value === null && typeof value === "object";
 };
 
@@ -57,7 +57,7 @@ export const isInfinity = (value: any): boolean => {
 	return typeof value === "number" && !isFinite(value);
 };
 
-export const isDate = (value: any): boolean => {
+export const isDate = (value: any): value is Date => {
 	return (
 		value instanceof Date ||
 		(typeof value === "object" && value !== null && typeof value.getMonth === "function") ||
@@ -65,15 +65,15 @@ export const isDate = (value: any): boolean => {
 	);
 };
 
-export const isUndefined = (value: any): boolean => {
+export const isUndefined = (value: any): value is undefined => {
 	return value === undefined && typeof value === "undefined";
 };
 
-export const isFunction = (value: any): boolean => {
+export const isFunction = (value: any): value is Function => {
 	return typeof value === "function";
 };
 
-export const isSymbol = (value: any): boolean => {
+export const isSymbol = (value: any): value is symbol => {
 	return typeof value === "symbol";
 };
 

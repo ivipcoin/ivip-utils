@@ -5,7 +5,7 @@ const isArray = (value) => {
     return Array.isArray(value) && typeof value === "object";
 };
 exports.isArray = isArray;
-const isTypedArray = (val) => typeof val === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(val.constructor.name);
+const isTypedArray = (value) => typeof value === "object" && ["ArrayBuffer", "Buffer", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array"].includes(value.constructor.name);
 exports.isTypedArray = isTypedArray;
 const isObject = (value) => {
     return typeof value === "object" && value !== null && !Array.isArray(value);
