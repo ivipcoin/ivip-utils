@@ -49,7 +49,7 @@ export const isInfinity = (value) => {
 export const isDate = (value) => {
     return (value instanceof Date ||
         (typeof value === "object" && value !== null && typeof value.getMonth === "function") ||
-        (typeof value === "string" && /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z?$/.test(value) && !isNaN(Date.parse(value))));
+        (typeof value === "string" && /^\d+$/.test(value) !== true && !isNaN(Date.parse(value))));
 };
 export const isUndefined = (value) => {
     return value === undefined && typeof value === "undefined";
